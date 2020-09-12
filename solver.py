@@ -22,6 +22,12 @@ def main():
     _INTERPOLATE_NR = int(inp_data["interpolate_nr"])
     _POT = inp_data['pot']
 
+    _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
+
+    pot = calculus.calc.pot_calc(_XPLOT, _POT, _REG_TYPE)
+
+    _EVAL, _EVEC = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS, pot)
+
 
 if __name__ == '__main__':
     main()
