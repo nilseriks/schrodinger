@@ -34,6 +34,5 @@ def main():
     calculus.file_io.write_result(_DIRECTORY, 'wavefuncs.dat', _WAVEFUNCS)
 
 
-
 if __name__ == '__main__':
     main()

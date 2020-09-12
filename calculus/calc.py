@@ -2,6 +2,7 @@
 
 import numpy as np
 import scipy as sp
+import scipy.interpolate
 
 
 def pot_calc(xplot, pot, interpoltype):
@@ -18,7 +19,7 @@ def pot_calc(xplot, pot, interpoltype):
     xx = pot[:, 0]
     yy = pot[:, 1]
     if interpoltype == 'linear':
-        VV = sp.interpolate.interp1d(xx, yy, 'linear')
+        VV = scipy.interpolate.interp1d(xx, yy, 'linear')
         return VV(xplot)
     elif interpoltype == 'polynomial':
         VV = sp.interpolate.barycentric_interpolate(xx, yy, xplot)
