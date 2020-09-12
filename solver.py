@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import calculus
+import numpy as np
 
 
 _DIRECTORY = 'files'
@@ -27,6 +28,11 @@ def main():
     pot = calculus.calc.pot_calc(_XPLOT, _POT, _REG_TYPE)
 
     _EVAL, _EVEC = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS, pot)
+
+    _WAVEFUNCS = calculus.calc.get_WF_array(_XPLOT, _MIN_EV, _MAX_EV, _EVEC)
+
+    calculus.file_io.write_result(_DIRECTORY, 'wavefuncs.dat', _WAVEFUNCS)
+
 
 
 if __name__ == '__main__':
