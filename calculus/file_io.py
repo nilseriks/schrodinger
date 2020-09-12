@@ -2,6 +2,7 @@
 
 import os.path
 import numpy as np
+import os
 
 
 def read_schrodinger(directory, fname):
@@ -37,3 +38,14 @@ def read_schrodinger(directory, fname):
     return {"_MASS": _MASS, "plot_set": plot_set, "evalues": evalues,
             "regression": regression, "interpolate_nr": interpolate_nr,
             "pot": pot}
+
+
+def write_result(directory, fname, array):
+    """Write an array in a file.
+
+    Args:
+        directory: Directory where to write the file.
+        fname: Name of the file.
+        array: Array to write into fname.
+    """
+    np.savetxt(os.path.join(directory, fname), array)
