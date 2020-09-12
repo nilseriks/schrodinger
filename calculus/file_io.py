@@ -49,3 +49,6 @@ def write_result(directory, fname, array):
         array: Array to write into fname.
     """
     np.savetxt(os.path.join(directory, fname), array)
+
+#test
+
