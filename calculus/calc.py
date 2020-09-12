@@ -46,7 +46,31 @@ def _solve_seq(xmin, xmax, npoint, mass, pot):
     """
     _DELTA = abs(xmin - xmax) / npoint
     _CONST = 1 / (mass * _DELTA**2)
-    DD = - 1 / 2 * _CONST * np.ones((npoint - 1,), dtype=float)
-    VV = pot + _CONST
-    EVAL, EVEC = sp.linalg.eigh_tridiagonal(VV, DD)
+    # Calculating the off diagonal values.
+    OD = - 1 / 2 * _CONST * np.ones((npoint - 1,), dtype=float)
+    # Calculating the main diagonal values.
+    MD = pot + _CONST
+    EVAL, EVEC = sp.linalg.eigh_tridiagonal(MD, OD)
     return EVAL, EVEC
+
+
+def get_WF_array(xplot, minEV, maxEV, evec):
+    """Calculating the Array of the wavefunctions in the
+        x1 Psi1(x1) Psi2(x1)
+        x2 Psi1(x2) Psi2(x2)
+    format.
+
+    Args:
+        xplot: Array of the x values.
+        minEV: Lower bound of eigenvalues.
+        maxEV: Upper bound of eigenvalues.
+        evec: Array of the eigenvectors.
+
+    Returns:
+        WF: Array with the described format.
+    """
+    WF = np.array([xplot])
+    for ii in range(minEV - 1, maxEV):
+        WF = np.vstack((WF, evec[:, ii]))
+    WF = np.transpose(WF)
+    return WF
