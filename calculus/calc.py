@@ -7,7 +7,7 @@ import scipy.interpolate
 import calculus
 
 
-def pot_calc(xplot, pot, interpoltype):
+def pot_calc(xplot, discrete_pot, interpoltype):
     """Interpolates the Potential for given data points.
 
     Args:
@@ -18,8 +18,8 @@ def pot_calc(xplot, pot, interpoltype):
     Returns:
         VV: Array with values of the potential at the points of xplot.
     """
-    xx = pot[:, 0]
-    yy = pot[:, 1]
+    xx = discrete_pot[:, 0]
+    yy = discrete_pot[:, 1]
     if interpoltype == 'linear':
         VV = scipy.interpolate.interp1d(xx, yy, 'linear')
         return VV(xplot)

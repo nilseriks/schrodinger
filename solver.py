@@ -17,15 +17,15 @@ def main():
     equation."""
     # Read out the informations of the schrodinger.inp file.
     inp_data = calculus.io.read_schrodinger(_DIRECTORY, _FILE)
-    _MASS = inp_data["_MASS"]
-    _XMIN = float(inp_data["plot_set"][0])
-    _XMAX = float(inp_data["plot_set"][1])
-    _NPOINT = int(inp_data["plot_set"][2])
-    _MIN_EV = int(inp_data["evalues"][0])
-    _MAX_EV = int(inp_data["evalues"][1])
-    _REG_TYPE = inp_data["regression"]
-    _INTERPOLATE_NR = int(inp_data["interpolate_nr"])
-    _DISCRETE_POT = inp_data['pot']
+    _MASS = inp_data['_MASS']
+    _XMIN = inp_data['_XMIN']
+    _XMAX = inp_data['_XMAX']
+    _NPOINT = inp_data['_NPOINT']
+    _MIN_EV = inp_data['_MIN_EV']
+    _MAX_EV = inp_data['_MAX_EV']
+    _REG_TYPE = inp_data['_REG_TYPE']
+    _INTERPOLATE_NR = inp_data['_INTERPOLATE_NR']
+    _DISCRETE_POT = inp_data['_POT']
 
     _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
 

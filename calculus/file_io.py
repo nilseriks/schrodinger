@@ -49,6 +49,7 @@ def read_schrodinger(directory, file):
     inttypestring = list_of_data[3]
     seperator = '\t' if '\t' in inttypestring else ' '
     alldata['_REG_TYPE'] = inttypestring.split(seperator)[0]
+    alldata['_REG_TYPE'] = alldata['_REG_TYPE'].replace("\n", "")
 
     intpointsstring = list_of_data[4]
     alldata['_INTERPOLATE_NR'] = getvalue(intpointsstring)[0]
