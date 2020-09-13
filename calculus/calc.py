@@ -126,5 +126,20 @@ def _pot_inf_square_well():
 def _pot_fin_square_well():
     """Calculates the potential of the finite square well problem."""
 
-    pot1 = np.zeros((1999, ), dtype=float)
-    #for nn in range()
+    pot1 = np.zeros((750, ), dtype=float)
+    pot2 = -10 * np.ones((499, ), dtype=float)
+    pot3 = np.zeros((750, ), dtype=float)
+    pot = np.concatenate((pot1, pot2, pot3), axis=0)
+    calculus.file_io.write_result('./../tests/test_potential',
+                                  'pot_fin_square_well.dat', pot)
+    return pot
+
+
+def _pot_harm_osc():
+    """Calculates the potential of the harmonic oscillator."""
+
+    _XPLOT = _XPLOT = np.linspace(-5, 5, num=1999, endpoint=True)
+    pot = 0.5 * _XPLOT**2
+    calculus.file_io.write_result('tests/test_potential',
+                                  'pot_harm_osc.dat', pot)
+    return pot

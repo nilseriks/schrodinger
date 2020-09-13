@@ -9,7 +9,7 @@ import numpy as np
 
 
 _DIRECTORY = 'files'
-_FILE = 'schrodinger3.inp'
+_FILE = 'schrodinger6.inp'
 
 
 def main():
@@ -39,9 +39,9 @@ def main():
 
     calculus.file_io.write_result(_DIRECTORY, 'energies.dat', _EVAL)
 
-    _POT = np.transpose(np.vstack((_XPLOT, _POT)))
+    _POTX = np.transpose(np.vstack((_XPLOT, _POT)))
 
-    calculus.file_io.write_result(_DIRECTORY, 'potential.dat', _POT)
+    calculus.file_io.write_result(_DIRECTORY, 'potential.dat', _POTX)
 
 
 if __name__ == '__main__':
