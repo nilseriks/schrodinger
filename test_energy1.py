@@ -12,11 +12,15 @@ _DIRECTORYTEST = 'tests/test_energy'
 
 
 _LIST = [('inf_square_well.inp', 'E_inf_square_well.dat'),
-         ('harm_osc.inp', 'E_harm_osc.dat')]
+         ('fin_square_well.inp', 'E_fin_square_well.dat'),
+         ('harm_osc.inp', 'E_harm_osc.dat'),
+         ('double_lin.inp', 'E_double_lin.dat'),
+         ('double_spline.inp', 'E_double_spline.dat'),
+         ('morse.inp', 'E_morse.dat')]
 
 
 @pytest.mark.parametrize('problem', _LIST)
-def test_energy3(problem):
+def test_energy(problem):
     expectedE = calculus.file_io.read_data(_DIRECTORYTEST, problem[1])
     inp_data = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
     _MASS = inp_data["_MASS"]
@@ -28,10 +32,10 @@ def test_energy3(problem):
     _POT = calculus.calc.pot_calc(_XPLOT, inp_data['pot'], _REG_TYPE)
     calculatedE = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS,
                                            _POT)[0][0:100]
-    if problem[0] == 'schrodinger.inp':
-        assert np.allclose(expectedE, calculatedE, rtol=1e-02, atol=1e-12)
-    else:
+    if problem[0] == 'harm_osc.inp':
         assert np.allclose(expectedE, calculatedE, rtol=1, atol=1e-12)
+    else:
+        assert np.allclose(expectedE, calculatedE, rtol=1e-2, atol=1e-12)
 
 
 
