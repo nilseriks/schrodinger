@@ -128,3 +128,12 @@ def _pot_fin_square_well():
 
     pot1 = np.zeros((1999, ), dtype=float)
     #for nn in range()
+
+
+def expected_value(xvalues, wavefcts, exp=1):
+    delta = np.abs(xmin - xmax) / npoints
+    expectedx = np.array([])
+    for wf in wavefcts:
+        expectedx = np.append(expectedx, [np.sum((wf ** 2) * xvalues) * delta], axis=0)
+
+    return expectedx
