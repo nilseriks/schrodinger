@@ -131,9 +131,37 @@ def _pot_fin_square_well():
 
 
 def expected_value(xvalues, wavefcts, exp=1):
-    delta = np.abs(xmin - xmax) / npoints
+    '''
+    Calculates the expected value of x
+
+    Args:
+        xvalues: array containing the x-values
+        wavefcts: array containing the eigenstates
+    Returns:
+        expectedx: arry containing expected values of x
+    '''
+    delta = np.abs(xvalues[0] - xvalues[-1]) / len(xvalues)
     expectedx = np.array([])
-    for wf in wavefcts:
-        expectedx = np.append(expectedx, [np.sum((wf ** 2) * xvalues) * delta], axis=0)
+    for wf, xx in zip(wavefcts, xvalues):
+        expectedx = np.append(expectedx, [np.sum((wf ** 2) * (xx ** exp))
+                                            * delta], axis=0)
 
     return expectedx
+
+
+def uncertainties(xvalues, wavefcts):
+    '''
+    Calculates the uncertainties of the x-values
+
+    Args:
+        xvalues: array containing the x-values
+        wavefcts: array containing the eigenstates
+    Returns:
+        uncert: Uncertainties of x
+    '''
+    expx = expected_value(xvalues, wavefcts, 1)
+    expxsquared = expected_value(xvalue, wavefcts, 2)
+
+    uncert = expx - expxsquared
+
+    return uncert
