@@ -143,3 +143,13 @@ def _pot_harm_osc():
     calculus.file_io.write_result('tests/test_potential',
                                   'pot_harm_osc.dat', pot)
     return pot
+
+
+def expected_value(xvalues, wavefcts, exp=1):
+    delta = np.abs(xmin - xmax) / npoints
+    expectedx = np.array([])
+    for wf in wavefcts:
+        expectedx = np.append(expectedx, [np.sum((wf ** 2) * xvalues) * delta],
+                                          axis=0)
+
+    return expectedx
