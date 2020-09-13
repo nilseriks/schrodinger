@@ -5,39 +5,55 @@ import numpy as np
 import os
 
 
-def read_schrodinger(directory, fname):
-    """Function to read out the schrodinger.inp file and return the
-    informations as a dictionary.
+def getvalue(string_with_data):
+    aa = string_with_data
+    hashindex = string_with_data.find('#')
+    newstr = ''.join((ch if ch in '0123456789.-e' else ' ')
+                        for ch in aa[0:hashindex])
+
+    numbers = [float(i) for i in newstr.split()]
+
+    return numbers
+
+
+def read_schroedinger(filepath):
+    '''
+    Reads the file "schrodinger.inp" containing special formated user data
+    describing the problem
 
     Args:
-        directory: Name of the directory containing 'fname' file.
-        fname: Name of the input file.
+        filepath: Filepath of "schrodinger.inp"
 
     Returns:
-        Directory with all informations: mass of the particle, settings of
-        the potential, lower and upper bound of the eigenvalues, type of the
-        interpolation, number of given points of the potential, points of the
-        potential."""
-    filename = os.path.join(directory, fname)
-    with open(filename) as fp:
-        lines = fp.readlines()
-        ii = 0
-        # Read out the lines of the file.
-        for item in lines:
-            newitem = item.replace("\n", "")
-            lines[ii] = newitem
-            ii += 1
-        lines = lines[:5]
-    _MASS = float(lines[0])
-    plot_set = lines[1].split()
-    evalues = lines[2].split()
-    regression = lines[3]
-    interpolate_nr = int(lines[4])
-    # Read the points of the potential.
-    pot = np.loadtxt(filename, skiprows=5)
-    return {"_MASS": _MASS, "plot_set": plot_set, "evalues": evalues,
-            "regression": regression, "interpolate_nr": interpolate_nr,
-            "pot": pot}
+        alldata: Dictionary containing the needed data for further calculations
+    '''
+
+    list_of_data = open(filepath, 'r').readlines()
+
+    alldata = dict()
+
+    massstring = list_of_data[0]
+    alldata['_MASS'] = getvalue(massstring)[0]
+
+    interpolationstring = list_of_data[1]
+    alldata['_XMIN'] = getvalue(interpolationstring)[0]
+    alldata['_XMAX'] = getvalue(interpolationstring)[1]
+    alldata['_NPOINT'] = int(getvalue(interpolationstring)[2])
+
+    EVstring = list_of_data[2]
+    alldata['_MIN_EV'] = int(getvalue(EVstring)[0])
+    alldata['_MAX_EV'] = int(getvalue(EVstring)[1])
+
+    inttypestring = list_of_data[3]
+    seperator = '\t' if '\t' in inttypestring else ' '
+    alldata['_REG_TYPE'] = inttypestring.split(seperator)[0]
+
+    intpointsstring = list_of_data[4]
+    alldata['_INTERPOLATE_NR'] = getvalue(intpointsstring)[0]
+
+    alldata['_POT'] = np.loadtxt(filepath, skiprows=5)
+
+    return(alldata)
 
 
 def write_result(directory, fname, array):
