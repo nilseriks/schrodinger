@@ -1,5 +1,5 @@
 .spyproject/
-../calculus/__pycache__/
+../calculus/__pycache__
 __pycache__
 .cache/
 calculus/__pycache__/calc.cpython-36.pyc

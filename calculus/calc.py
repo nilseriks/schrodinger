@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
+"""Module which contains all functions for numerical calculations."""
 
 import numpy as np
 import scipy as sp
 import scipy.interpolate
+import calculus
 
 
 def pot_calc(xplot, pot, interpoltype):
@@ -77,21 +79,20 @@ def get_WF_array(xplot, minEV, maxEV, evec):
     return WF
 
 
-def _energy_inf_square_well(maxEV, xmin, xmax, mass):
+def _energy_inf_square_well(maxEV):
     """Calculates the energies of the infinite square well for the first maxEV
     eigenvalues.
 
     Args:
         EVmax: Set the upper bound for the eigenvalues to calculate.
-        xmin: Start of the box.
-        xmax: End of the box.
-        mass: Mass of the Particle.
 
     Returns:
         energy: Array containing the calculated eigenvalues."""
     energy = np.zeros((maxEV, ), dtype=float)
     for nn in range(0, maxEV):
-        energy[nn] = np.pi**2 * (nn + 1)**2 / (2 * mass * (xmin - xmax)**2)
+        energy[nn] = np.pi**2 * (nn + 1)**2 / (2 * 2 * (-2 - 2)**2)
+    calculus.file_io.write_result('tests/test_energy',
+                                  'E_inf_square_well.dat', energy)
     return energy
 
 
@@ -108,6 +109,22 @@ def _energy_harm_osc(maxEV):
     energy = np.zeros((maxEV, ), dtype=float)
     for nn in range(maxEV):
         energy[nn] = 0.5 * nn + 0.25
-    file_io.write_result('./../tests/test_energy', 'E_harm_osc.dat',
+    calculus.file_io.write_result('tests/test_energy', 'E_harm_osc.dat',
                                   energy)
     return energy
+
+
+def _pot_inf_square_well():
+    """Calculates the potential of the ininite square well problem."""
+
+    pot = np.zeros((1999, ), dtype=float)
+    calculus.file_io.write_result('tests/test_potential',
+                                  'pot_inf_square_well.dat', pot)
+    return pot
+
+
+def _pot_fin_square_well():
+    """Calculates the potential of the finite square well problem."""
+
+    pot1 = np.zeros((1999, ), dtype=float)
+    #for nn in range()

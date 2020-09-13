@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
+"""Main environment to solve the one dimensional time independent schrodinger
+equation for diffrent potentials. It writes the energies into energies.dat,
+the wavefunctions into wavefuncs.dat, the potential into potential.dat and
+the expected values of the position into expvalues.dat."""
 
 import calculus
 import numpy as np
 
 
 _DIRECTORY = 'files'
-_FILE = 'schrodinger6.inp'
+_FILE = 'schrodinger3.inp'
 
 
 def main():
@@ -21,13 +25,13 @@ def main():
     _MAX_EV = int(inp_data["evalues"][1])
     _REG_TYPE = inp_data["regression"]
     _INTERPOLATE_NR = int(inp_data["interpolate_nr"])
-    _POT = inp_data['pot']
+    _DISCRETE_POT = inp_data['pot']
 
     _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
 
-    pot = calculus.calc.pot_calc(_XPLOT, _POT, _REG_TYPE)
+    _POT = calculus.calc.pot_calc(_XPLOT, _DISCRETE_POT, _REG_TYPE)
 
-    _EVAL, _EVEC = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS, pot)
+    _EVAL, _EVEC = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS, _POT)
 
     _WAVEFUNCS = calculus.calc.get_WF_array(_XPLOT, _MIN_EV, _MAX_EV, _EVEC)
 
@@ -35,7 +39,7 @@ def main():
 
     calculus.file_io.write_result(_DIRECTORY, 'energies.dat', _EVAL)
 
-    _POT = np.transpose(np.vstack((_XPLOT, pot)))
+    _POT = np.transpose(np.vstack((_XPLOT, _POT)))
 
     calculus.file_io.write_result(_DIRECTORY, 'potential.dat', _POT)
 

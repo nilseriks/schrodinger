@@ -21,7 +21,17 @@ _LIST = [('inf_square_well.inp', 'E_inf_square_well.dat'),
 
 @pytest.mark.parametrize('problem', _LIST)
 def test_energy(problem):
+    """Testing environment for the energies of the following physical problems,
+    with specific tolarence:
+        infinite square well (rtol=1e-02, atol=1e-12)
+        finite square well (rtol=1e-15, atol=1e-15)
+        harmonic oscillator (rtol=1e-03, atol=1e-12)
+        double oscillator (linear interpolation) (rtol=1e-15, atol=1e-15)
+        double oscillator (spline interpolation) (rtol=1e-15, atol=1e-15)
+        morse potential (rtol=1e-15, atol=1e-15).
+    """
     expectedE = calculus.file_io.read_data(_DIRECTORYTEST, problem[1])
+
     inp_data = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
     _MASS = inp_data["_MASS"]
     _XMIN = float(inp_data["plot_set"][0])
@@ -30,6 +40,7 @@ def test_energy(problem):
     _REG_TYPE = inp_data["regression"]
     _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
     _POT = calculus.calc.pot_calc(_XPLOT, inp_data['pot'], _REG_TYPE)
+
     calculatedE = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS,
                                            _POT)[0][0:20]
     if problem[0] == 'harm_osc.inp':
