@@ -4,69 +4,39 @@ schrodinger equation."""
 
 import numpy as np
 import calculus
+import pytest
 
 
-_DIRECTORYFILE = 'files'
-_FILE = 'schrodinger.inp'
-_DIRECTORYTEST = 'test_data'
-
-inp_data = calculus.io.read_schrodinger(_DIRECTORYFILE, _FILE)
-_MASS = inp_data["_MASS"]
-_XMIN = float(inp_data["plot_set"][0])
-_XMAX = float(inp_data["plot_set"][1])
-_NPOINT = int(inp_data["plot_set"][2])
-_MIN_EV = int(inp_data["evalues"][0])
-_MAX_EV = int(inp_data["evalues"][1])
-_REG_TYPE = inp_data["regression"]
-_INTERPOLATE_NR = int(inp_data["interpolate_nr"])
-_POT = inp_data['pot']
-_XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
-_XPLOT2 = np.linspace(0, 4, num=_NPOINT, endpoint=True)
-_POT2 = calculus.calc.pot_calc(_XPLOT, _POT, 'linear')
+_DIRECTORYFILE = 'tests'
+_DIRECTORYTEST = 'tests/test_energy'
 
 
-def energy_inf_square_well(maxEV, xmin, xmax, mass):
-    """Calculates the energies of the infinite square well for the first maxEV
-    eigenvalues.
-
-    Args:
-        EVmax: Set the upper bound for the eigenvalues to calculate.
-        xmin: Start of the box.
-        xmax: End of the box.
-        mass: Mass of the Particle.
-
-    Returns:
-        energy: Array containing the calculated eigenvalues."""
-    energy = np.zeros((maxEV, ), dtype=float)
-    for nn in range(0, maxEV):
-        energy[nn] = np.pi**2 * (nn + 1)**2 / (2 * mass * (xmin - xmax)**2)
-    return energy
+_LIST = [('inf_square_well.inp', 'E_inf_square_well.dat'),
+         ('harm_osc.inp', 'E_harm_osc.dat')]
 
 
-def energy_harm_osc(maxEV):
-    """Calculates the energies of the harmonic oscillator for given number of
-    eigenvalues.
-
-    Args:
-        EVmin: Set the lower bound for the eigenvalues to calculate.
-        EVmax: Set the upper bound for the eigenvalues to calculate.
-
-    Returns:
-        energy: Array containing the calculated eigenvalues."""
-    energy = np.zeros((maxEV, ), dtype=float)
-    for nn in range(1, maxEV):
-        energy[nn] = nn + 0.5
-    return energy
-
-
-def test_energy():
-    expectedE = calculus.file_io.read_data(_DIRECTORYTEST,
-                                           'E_inf_square_well.dat')
-    expectedE = np.array([expectedE])
-    calculatedE = calculus.calc._solve_seq(-2, 2, 1999, 2, _POT2)[0][0:100]
-    assert np.allclose(expectedE, calculatedE, rtol=1e-02, atol=1e-02)
+@pytest.mark.parametrize('problem', _LIST)
+def test_energy3(problem):
+    expectedE = calculus.file_io.read_data(_DIRECTORYTEST, problem[1])
+    inp_data = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
+    _MASS = inp_data["_MASS"]
+    _XMIN = float(inp_data["plot_set"][0])
+    _XMAX = float(inp_data["plot_set"][1])
+    _NPOINT = int(inp_data["plot_set"][2])
+    _REG_TYPE = inp_data["regression"]
+    _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
+    _POT = calculus.calc.pot_calc(_XPLOT, inp_data['pot'], _REG_TYPE)
+    calculatedE = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS,
+                                           _POT)[0][0:100]
+    if problem[0] == 'schrodinger.inp':
+        assert np.allclose(expectedE, calculatedE, rtol=1e-02, atol=1e-12)
+    else:
+        assert np.allclose(expectedE, calculatedE, rtol=1, atol=1e-12)
 
 
+
+
+'''
 def wf_inf_square_well(xplot, xmin, xmax, npoint, wf_number):
     _LENGTH = abs(xmin - xmax)
     PSI = np.zeros((npoint, wf_number), dtype=float)
@@ -75,8 +45,7 @@ def wf_inf_square_well(xplot, xmin, xmax, npoint, wf_number):
                              / _LENGTH)
     return PSI
 
-
-_POT2 = calculus.calc.pot_calc(_XPLOT, _POT, 'linear')
+#_POT2 = calculus.calc.pot_calc(_XPLOT, _POT, 'linear')
 print(wf_inf_square_well(_XPLOT2, 0, 4, _NPOINT, 20))
 print(calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, 1, _POT2)[1][:, 0:20])
 
@@ -88,3 +57,4 @@ def test_inf_square_well():
     for nn in range(20):
         BB[:, nn] = BB[:, nn] * 1 / np.sum(BB[:, nn])
     assert np.allclose(AA, BB, rtol=1, atol=1)
+    '''

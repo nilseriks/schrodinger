@@ -75,3 +75,37 @@ def get_WF_array(xplot, minEV, maxEV, evec):
         WF = np.vstack((WF, evec[:, ii]))
     WF = np.transpose(WF)
     return WF
+
+
+def _energy_inf_square_well(maxEV, xmin, xmax, mass):
+    """Calculates the energies of the infinite square well for the first maxEV
+    eigenvalues.
+
+    Args:
+        EVmax: Set the upper bound for the eigenvalues to calculate.
+        xmin: Start of the box.
+        xmax: End of the box.
+        mass: Mass of the Particle.
+
+    Returns:
+        energy: Array containing the calculated eigenvalues."""
+    energy = np.zeros((maxEV, ), dtype=float)
+    for nn in range(0, maxEV):
+        energy[nn] = np.pi**2 * (nn + 1)**2 / (2 * mass * (xmin - xmax)**2)
+    return energy
+
+
+def _energy_harm_osc(maxEV):
+    """Calculates the energies of the harmonic oscillator for given number of
+    eigenvalues.
+
+    Args:
+        EVmin: Set the lower bound for the eigenvalues to calculate.
+        EVmax: Set the upper bound for the eigenvalues to calculate.
+
+    Returns:
+        energy: Array containing the calculated eigenvalues."""
+    energy = np.zeros((maxEV, ), dtype=float)
+    for nn in range(1, maxEV):
+        energy[nn] = nn + 0.5
+    return energy

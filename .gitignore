@@ -1,4 +1,5 @@
 .spyproject/
-calculus/__pycache__/
+../calculus/__pycache__/
 __pycache__
 .cache/
+
