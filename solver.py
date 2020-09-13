@@ -33,6 +33,8 @@ def main():
 
     calculus.file_io.write_result(_DIRECTORY, 'wavefuncs.dat', _WAVEFUNCS)
 
+    calculus.file_io.write_result(_DIRECTORY, 'energies.dat', _EVAL)
+
 
 if __name__ == '__main__':
     main()

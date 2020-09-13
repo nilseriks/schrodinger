@@ -6,10 +6,11 @@ import numpy as np
 import calculus
 
 
-_DIRECTORY = 'files'
+_DIRECTORYFILE = 'files'
 _FILE = 'schrodinger.inp'
+_DIRECTORYTEST = 'test_data'
 
-inp_data = calculus.io.read_schrodinger(_DIRECTORY, _FILE)
+inp_data = calculus.io.read_schrodinger(_DIRECTORYFILE, _FILE)
 _MASS = inp_data["_MASS"]
 _XMIN = float(inp_data["plot_set"][0])
 _XMAX = float(inp_data["plot_set"][1])
@@ -21,13 +22,14 @@ _INTERPOLATE_NR = int(inp_data["interpolate_nr"])
 _POT = inp_data['pot']
 _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
 _XPLOT2 = np.linspace(0, 4, num=_NPOINT, endpoint=True)
+_POT2 = calculus.calc.pot_calc(_XPLOT, _POT, 'linear')
 
-def energy_inf_square_well(EVmin, EVmax, xmin, xmax, mass):
-    """Calculates the energies of the infinite square well for given number
-    of eigenvalues.
+
+def energy_inf_square_well(maxEV, xmin, xmax, mass):
+    """Calculates the energies of the infinite square well for the first maxEV
+    eigenvalues.
 
     Args:
-        EVmin: Set the lower bound for the eigenvalues to calculate.
         EVmax: Set the upper bound for the eigenvalues to calculate.
         xmin: Start of the box.
         xmax: End of the box.
@@ -35,13 +37,13 @@ def energy_inf_square_well(EVmin, EVmax, xmin, xmax, mass):
 
     Returns:
         energy: Array containing the calculated eigenvalues."""
-    energy = np.zeros((EVmax, ), dtype=float)
-    for nn in range(EVmin, EVmax):
-        energy[nn] = np.pi**2 * nn**2 / (2 * mass * (xmin - xmax)**2)
+    energy = np.zeros((maxEV, ), dtype=float)
+    for nn in range(0, maxEV):
+        energy[nn] = np.pi**2 * (nn + 1)**2 / (2 * mass * (xmin - xmax)**2)
     return energy
 
 
-def energy_harm_osc(EVmin, EVmax):
+def energy_harm_osc(maxEV):
     """Calculates the energies of the harmonic oscillator for given number of
     eigenvalues.
 
@@ -51,10 +53,18 @@ def energy_harm_osc(EVmin, EVmax):
 
     Returns:
         energy: Array containing the calculated eigenvalues."""
-    energy = np.zeros((EVmax, ), dtype=float)
-    for nn in range(EVmin, EVmax):
+    energy = np.zeros((maxEV, ), dtype=float)
+    for nn in range(1, maxEV):
         energy[nn] = nn + 0.5
     return energy
+
+
+def test_energy():
+    expectedE = calculus.file_io.read_data(_DIRECTORYTEST,
+                                           'E_inf_square_well.dat')
+    expectedE = np.array([expectedE])
+    calculatedE = calculus.calc._solve_seq(-2, 2, 1999, 2, _POT2)[0][0:100]
+    assert np.allclose(expectedE, calculatedE, rtol=1e-02, atol=1e-02)
 
 
 def wf_inf_square_well(xplot, xmin, xmax, npoint, wf_number):
