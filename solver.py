@@ -35,6 +35,10 @@ def main():
 
     calculus.file_io.write_result(_DIRECTORY, 'energies.dat', _EVAL)
 
+    _POT = np.transpose(np.vstack((_XPLOT, pot)))
+
+    calculus.file_io.write_result(_DIRECTORY, 'potential.dat', _POT)
+
 
 if __name__ == '__main__':
     main()

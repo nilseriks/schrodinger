@@ -106,6 +106,8 @@ def _energy_harm_osc(maxEV):
     Returns:
         energy: Array containing the calculated eigenvalues."""
     energy = np.zeros((maxEV, ), dtype=float)
-    for nn in range(1, maxEV):
-        energy[nn] = nn + 0.5
+    for nn in range(maxEV):
+        energy[nn] = 0.5 * nn + 0.25
+    file_io.write_result('./../tests/test_energy', 'E_harm_osc.dat',
+                                  energy)
     return energy

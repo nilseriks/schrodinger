@@ -31,11 +31,13 @@ def test_energy(problem):
     _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
     _POT = calculus.calc.pot_calc(_XPLOT, inp_data['pot'], _REG_TYPE)
     calculatedE = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS,
-                                           _POT)[0][0:100]
+                                           _POT)[0][0:20]
     if problem[0] == 'harm_osc.inp':
-        assert np.allclose(expectedE, calculatedE, rtol=1, atol=1e-12)
+        assert np.allclose(expectedE, calculatedE, rtol=1e-03, atol=1e-12)
+    elif problem[0] == 'inf_square_well.inp':
+        assert np.allclose(expectedE, calculatedE, rtol=1e-02, atol=1e-12)
     else:
-        assert np.allclose(expectedE, calculatedE, rtol=1e-2, atol=1e-12)
+        assert np.allclose(expectedE, calculatedE, rtol=1e-15, atol=1e-15)
 
 
 
