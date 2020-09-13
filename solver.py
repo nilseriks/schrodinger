@@ -8,7 +8,7 @@ import calculus
 import numpy as np
 
 
-_DIRECTORY = 'files'
+_DIRECTORY = '../files'
 _FILE = 'schrodinger3.inp'
 
 

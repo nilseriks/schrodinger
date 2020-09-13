@@ -16,7 +16,7 @@ def getvalue(string_with_data):
     return numbers
 
 
-def read_schroedinger(filepath):
+def read_schrodinger(directory, file):
     '''
     Reads the file "schrodinger.inp" containing special formated user data
     describing the problem
@@ -27,6 +27,8 @@ def read_schroedinger(filepath):
     Returns:
         alldata: Dictionary containing the needed data for further calculations
     '''
+
+    filepath = directory + '/' + file
 
     list_of_data = open(filepath, 'r').readlines()
 
