@@ -9,7 +9,7 @@ import numpy as np
 
 
 _DIRECTORY = 'files'
-_FILE = 'schrodinger6.inp'
+_FILE = 'schrodinger.inp'
 
 
 def main():
@@ -26,16 +26,20 @@ def main():
     _EVAL, _EVEC = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
                                             inp['_NPOINT'], inp['_MASS'], _POT)
 
-    _WAVEFUNCS = calculus.calc.get_WF_array(_XPLOT, inp['_MIN_EV'],
+    _EVAL = _EVAL[inp['_MIN_EV'] - 1: inp['_MAX_EV'] - 1]
+
+    _EVEC = calculus.calc.get_WF_array(_XPLOT, inp['_MIN_EV'],
                                             inp['_MAX_EV'], _EVEC)
 
-    calculus.file_io.write_result(_DIRECTORY, 'wavefuncs.dat', _WAVEFUNCS)
+    calculus.file_io.write_result(_DIRECTORY, 'wavefuncs.dat', _EVEC)
 
     calculus.file_io.write_result(_DIRECTORY, 'energies.dat', _EVAL)
 
     _POTX = np.transpose(np.vstack((_XPLOT, _POT)))
 
     calculus.file_io.write_result(_DIRECTORY, 'potential.dat', _POTX)
+
+    calculus.file_io.create_files(_DIRECTORY, _EVAL, _EVAL, _POTX, _EVEC)
 
 
 if __name__ == '__main__':
