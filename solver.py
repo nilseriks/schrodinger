@@ -16,24 +16,18 @@ def main():
     """Main function to solve the one dimensiional time independent schrodinger
     equation."""
     # Read out the informations of the schrodinger.inp file.
-    inp_data = calculus.io.read_schrodinger(_DIRECTORY, _FILE)
-    _MASS = inp_data['_MASS']
-    _XMIN = inp_data['_XMIN']
-    _XMAX = inp_data['_XMAX']
-    _NPOINT = inp_data['_NPOINT']
-    _MIN_EV = inp_data['_MIN_EV']
-    _MAX_EV = inp_data['_MAX_EV']
-    _REG_TYPE = inp_data['_REG_TYPE']
-    _INTERPOLATE_NR = inp_data['_INTERPOLATE_NR']
-    _DISCRETE_POT = inp_data['_POT']
+    inp = calculus.io.read_schrodinger(_DIRECTORY, _FILE)
 
-    _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
+    _XPLOT = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
+                         endpoint=True)
 
-    _POT = calculus.calc.pot_calc(_XPLOT, _DISCRETE_POT, _REG_TYPE)
+    _POT = calculus.calc.pot_calc(_XPLOT, inp['_POT'], inp['_REG_TYPE'])
 
-    _EVAL, _EVEC = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS, _POT)
+    _EVAL, _EVEC = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
+                                            inp['_NPOINT'], inp['_MASS'], _POT)
 
-    _WAVEFUNCS = calculus.calc.get_WF_array(_XPLOT, _MIN_EV, _MAX_EV, _EVEC)
+    _WAVEFUNCS = calculus.calc.get_WF_array(_XPLOT, inp['_MIN_EV'],
+                                            inp['_MAX_EV'], _EVEC)
 
     calculus.file_io.write_result(_DIRECTORY, 'wavefuncs.dat', _WAVEFUNCS)
 

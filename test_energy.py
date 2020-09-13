@@ -32,16 +32,13 @@ def test_energy(problem):
     """
     expectedE = calculus.file_io.read_data(_DIRECTORYTEST, problem[1])
 
-    inp_data = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
-    _MASS = inp_data["_MASS"]
-    _XMIN = float(inp_data["plot_set"][0])
-    _XMAX = float(inp_data["plot_set"][1])
-    _NPOINT = int(inp_data["plot_set"][2])
-    _REG_TYPE = inp_data["regression"]
-    _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
-    _POT = calculus.calc.pot_calc(_XPLOT, inp_data['pot'], _REG_TYPE)
+    inp = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
+    _XPLOT = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
+                         endpoint=True)
+    _POT = calculus.calc.pot_calc(_XPLOT, inp['_POT'], inp['_REG_TYPE'])
 
-    calculatedE = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, _MASS,
+    calculatedE = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
+                                           inp['_NPOINT'], inp['_MASS'],
                                            _POT)[0][0:20]
     if problem[0] == 'harm_osc.inp':
         assert np.allclose(expectedE, calculatedE, rtol=1e-03, atol=1e-12)

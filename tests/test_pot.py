@@ -32,13 +32,11 @@ def test_pot(problem):
     """
     expected_pot = calculus.file_io.read_data(_DIRECTORYTEST, problem[1])
 
-    inp_data = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
-    _XMIN = float(inp_data["plot_set"][0])
-    _XMAX = float(inp_data["plot_set"][1])
-    _NPOINT = int(inp_data["plot_set"][2])
-    _REG_TYPE = inp_data["regression"]
-    _XPLOT = np.linspace(_XMIN, _XMAX, num=_NPOINT, endpoint=True)
+    inp = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
+    _XPLOT = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
+                         endpoint=True)
 
-    calculated_pot = calculus.calc.pot_calc(_XPLOT, inp_data['pot'], _REG_TYPE)
+    calculated_pot = calculus.calc.pot_calc(_XPLOT, inp['_POT'],
+                                            inp['_REG_TYPE'])
 
     assert np.allclose(expected_pot, calculated_pot, rtol=1e-14, atol=1e-14)
