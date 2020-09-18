@@ -26,7 +26,8 @@ def main():
     _EVAL, _EVEC = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
                                             inp['_NPOINT'], inp['_MASS'], _POT)
 
-    _EVAL = _EVAL[inp['_MIN_EV'] - 1: inp['_MAX_EV'] - 1]
+    _EVAL = _EVAL[inp['_MIN_EV'] - 1: inp['_MAX_EV']]
+
 
     _EVEC = calculus.calc.get_WF_array(_XPLOT, inp['_MIN_EV'],
                                             inp['_MAX_EV'], _EVEC)
