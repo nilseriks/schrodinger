@@ -9,7 +9,7 @@ import numpy as np
 
 
 _DIRECTORY = 'files'
-_FILE = 'schrodinger.inp'
+_FILE = 'schrodinger5.inp'
 
 
 def main():
