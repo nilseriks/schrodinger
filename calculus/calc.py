@@ -72,9 +72,11 @@ def get_WF_array(xplot, minEV, maxEV, evec):
     Returns:
         WF: Array with the described format.
     """
+    delta = abs(xplot[0] - xplot[1])
     WF = np.array([xplot])
     for ii in range(minEV - 1, maxEV):
-        evec[:, ii] /= np.linalg.norm(evec[:, ii])
+        norm = np.sqrt(delta * np.sum(evec[:, ii] * evec[:, ii]))
+        evec[:, ii] /= norm
         WF = np.vstack((WF, evec[:, ii]))
     WF = np.transpose(WF)
     return WF
