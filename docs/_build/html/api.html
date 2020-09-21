@@ -1,0 +1,207 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>API Documentation &#8212; Schrodinger 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Here will be API documentation soon!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="api-documentation">
+<h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-file_io">
+<span id="file-io"></span><h2>File-IO<a class="headerlink" href="#module-file_io" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="file_io.create_files">
+<code class="descclassname">file_io.</code><code class="descname">create_files</code><span class="sig-paren">(</span><em>filepath</em>, <em>endata</em>, <em>expxdata</em>, <em>potdata</em>, <em>wfdata</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.create_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates files containing the energies (<cite>energies.dat</cite>), expected values for
+x and thier uncertainities (<cite>expvalues.dat</cite>), the potentials and their
+corresponding x-values (<cite>potential.dat</cite>) and the eigenstates with their
+corresponding x_values (<cite>wavefuncs.dat</cite>)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>filepath</strong> – Filepath of the destination, in which the files should be</li>
+<li><strong>saved</strong> – </li>
+<li><strong>endata</strong> – array containing data dedicated to <cite>energies.dat</cite></li>
+<li><strong>expxdata</strong> – array containing data dedicated to <cite>expvalues.dat</cite></li>
+<li><strong>potdata</strong> – array containing data dedicated to <cite>potential.dat</cite></li>
+<li><strong>wfdata</strong> – array containing data dedicated to <cite>wavefuncs.dat</cite></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="file_io.read_data">
+<code class="descclassname">file_io.</code><code class="descname">read_data</code><span class="sig-paren">(</span><em>directory</em>, <em>fname</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a file and extract the contant as an array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>directory</strong> – Directory which contains the file.</li>
+<li><strong>Name of the file.</strong> (<em>fname.</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Array of content.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="file_io.read_files">
+<code class="descclassname">file_io.</code><code class="descname">read_files</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.read_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>reads four different files and converts them into arrays</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>filepath</strong> – Filepath of , <cite>energies.dat</cite>, <cite>expvalues.dat, `potential.dat</cite></li>
+<li><strong>wavefuncs.dat</strong> (<em>and</em>) – </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array containing energies of their corresponding eigenstates
+expxdata: array containing expected values for x and their
+uncerainnities
+potdata: array containing potentials and corresponding x-values
+wfdata: array containing eigenstates and corresponding x-values</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">endata</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="file_io.read_schrodinger">
+<code class="descclassname">file_io.</code><code class="descname">read_schrodinger</code><span class="sig-paren">(</span><em>directory</em>, <em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.read_schrodinger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the file “schrodinger.inp” containing special formated user data
+describing the problem</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> – Filepath of “schrodinger.inp”</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary containing the needed data for further calculations</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">alldata</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="file_io.write_result">
+<code class="descclassname">file_io.</code><code class="descname">write_result</code><span class="sig-paren">(</span><em>directory</em>, <em>fname</em>, <em>array</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.write_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write an array in a file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>directory</strong> – Directory where to write the file.</li>
+<li><strong>fname</strong> – Name of the file.</li>
+<li><strong>array</strong> – Array to write into fname.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="calculations">
+<h2>Calculations<a class="headerlink" href="#calculations" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Here will be API documentation soon!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Nils-Erik Schütte & Jan-Luca Hubald.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.7</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
