@@ -148,6 +148,25 @@ def _pot_harm_osc():
     return pot
 
 
+def expected_values(xplot, EVEC, minEV, maxEV):
+    """Calculates the expected value of the position.
+
+    Args:
+        xplot: x values.
+        EVEC: Array of the eigenvectors to calculate the expected position of.
+        minEV: Lower bound of the eigenvalues.
+        maxEV: Upper bound of the eigenvalues.
+
+    Returns:
+        expectedx: Array containing the expected values of the position."""
+    delta = abs(xplot[0] - xplot[1])
+    expectedx = np.zeros((maxEV - minEV + 1, ), dtype=float)
+    for ii in range(minEV - 1, maxEV):
+        xx = delta * np.sum(EVEC[:, ii] * xplot * EVEC[:, ii])
+        expectedx[ii] = xx
+    return expectedx
+
+
 def expected_value(xvalues, wavefcts, exp=1):
     '''
     Calculates the expected value of x
