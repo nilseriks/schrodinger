@@ -80,7 +80,7 @@ def pot_plot(xmin, xmax, minEV, maxEV, EVAL, EVEC, pot, xplot, ydiff):
         plt.plot(xplot, _SCALE * EVEC[:, ii] + EVAL[ii], color=_COLOR,
                  linewidth=2.5, zorder=2)
     plt.plot(xplot, pot, color='black', linewidth=2, zorder=0)
-    plt.show
+    plt.show()
 
 
 def main():

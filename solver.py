@@ -30,18 +30,15 @@ def main():
     _EVAL = _EVAL[inp['_MIN_EV'] - 1: inp['_MAX_EV']]
 
 
-    _EVEC = calculus.calc.get_WF_array(_XPLOT, inp['_MIN_EV'],
+    xevec = calculus.calc.get_WF_array(_XPLOT, inp['_MIN_EV'],
                                             inp['_MAX_EV'], _EVEC)
 
-    calculus.file_io.write_result(_DIRECTORY, 'wavefuncs.dat', _EVEC)
-
-    calculus.file_io.write_result(_DIRECTORY, 'energies.dat', _EVAL)
+    _EXPECTEDX = calculus.calc.expected_values(_XPLOT, _EVEC, inp['_MIN_EV'],
+                                               inp['_MAX_EV'])
 
     _POTX = np.transpose(np.vstack((_XPLOT, _POT)))
 
-    calculus.file_io.write_result(_DIRECTORY, 'potential.dat', _POTX)
-
-    calculus.file_io.create_files(_DIRECTORY, _EVAL, _EVAL, _POTX, _EVEC)
+    calculus.file_io.create_files(_DIRECTORY, _EVAL, _EXPECTEDX, _POTX, xevec)
 
 
 if __name__ == '__main__':
