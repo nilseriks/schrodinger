@@ -3,8 +3,8 @@
 schrodinger equation."""
 
 import numpy as np
-import calculus
 import pytest
+import calculus
 
 
 _DIRECTORYFILE = 'tests'
@@ -30,19 +30,19 @@ def test_energy(problem):
         double oscillator (spline interpolation) (rtol=1e-15, atol=1e-15)
         morse potential (rtol=1e-15, atol=1e-15).
     """
-    expectedE = calculus.file_io.read_data(_DIRECTORYTEST, problem[1])
+    expectede = calculus.file_io.read_data(_DIRECTORYTEST, problem[1])
 
     inp = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
-    _XPLOT = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
-                         endpoint=True)
-    _POT = calculus.calc.pot_calc(_XPLOT, inp['_POT'], inp['_REG_TYPE'])
+    xplot = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
+                        endpoint=True)
+    pot = calculus.calc.pot_calc(xplot, inp['_POT'], inp['_REG_TYPE'])
 
-    calculatedE = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
+    calculatede = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
                                            inp['_NPOINT'], inp['_MASS'],
-                                           _POT)[0][0:20]
+                                           pot)[0][0:20]
     if problem[0] == 'harm_osc.inp':
-        assert np.allclose(expectedE, calculatedE, rtol=1e-03, atol=1e-12)
+        assert np.allclose(expectede, calculatede, rtol=1e-03, atol=1e-12)
     elif problem[0] == 'inf_square_well.inp':
-        assert np.allclose(expectedE, calculatedE, rtol=1e-02, atol=1e-12)
+        assert np.allclose(expectede, calculatede, rtol=1e-02, atol=1e-12)
     else:
-        assert np.allclose(expectedE, calculatedE, rtol=1e-15, atol=1e-15)
+        assert np.allclose(expectede, calculatede, rtol=1e-15, atol=1e-15)

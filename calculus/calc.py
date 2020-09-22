@@ -3,7 +3,6 @@
 import numpy as np
 import scipy as sp
 import scipy.interpolate
-import calculus
 
 
 def pot_calc(xplot, discrete_pot, interpoltype):
@@ -56,7 +55,7 @@ def _solve_seq(xmin, xmax, npoint, mass, pot):
     return EVAL, EVEC
 
 
-def get_WF_array(xplot, minEV, maxEV, evec):
+def get_WF_array(xplot, min_ev, max_ev, evec):
     """
     Calculating the Array of the wavefunctions in the\n
     x1 Psi1(x1) Psi2(x1)\n
@@ -65,8 +64,8 @@ def get_WF_array(xplot, minEV, maxEV, evec):
 
     Args:
         xplot: Array of the x values.
-        minEV: Lower bound of eigenvalues.
-        maxEV: Upper bound of eigenvalues.
+        min_ev: Lower bound of eigenvalues.
+        max_ev: Upper bound of eigenvalues.
         evec: Array of the eigenvectors.
 
     Returns:
@@ -74,7 +73,7 @@ def get_WF_array(xplot, minEV, maxEV, evec):
     """
     delta = abs(xplot[0] - xplot[1])
     WF = np.array([xplot])
-    for ii in range(minEV - 1, maxEV):
+    for ii in range(min_ev - 1, max_ev):
         norm = np.sqrt(delta * np.sum(evec[:, ii] * evec[:, ii]))
         evec[:, ii] /= norm
         WF = np.vstack((WF, evec[:, ii]))
@@ -82,34 +81,34 @@ def get_WF_array(xplot, minEV, maxEV, evec):
     return WF
 
 
-def expected_values(xplot, EVEC, minEV, maxEV):
+def expected_values(xplot, evec, min_ev, max_ev):
     """Calculates the expected value of the position.
 
     Args:
         xplot: x values.
-        EVEC: Array of the eigenvectors to calculate the expected position of.
-        minEV: Lower bound of the eigenvalues.
-        maxEV: Upper bound of the eigenvalues.
+        evec: Array of the eigenvectors to calculate the expected position of.
+        min_ev: Lower bound of the eigenvalues.
+        max_ev: Upper bound of the eigenvalues.
 
     Returns:
         expectedx: Array containing the expected values of the position."""
     delta = abs(xplot[0] - xplot[1])
-    expectedx = np.zeros((maxEV - minEV + 1, ), dtype=float)
-    for ii in range(minEV - 1, maxEV):
-        xx = delta * np.sum(EVEC[:, ii] * xplot * EVEC[:, ii])
+    expectedx = np.zeros((max_ev - min_ev + 1, ), dtype=float)
+    for ii in range(min_ev - 1, max_ev):
+        xx = delta * np.sum(evec[:, ii] * xplot * evec[:, ii])
         expectedx[ii] = xx
     return expectedx
 
 
-def expected_x_square(xplot, EVEC, minEV, maxEV):
+def expected_x_square(xplot, evec, min_ev, max_ev):
     """Calculates the expected values of the square of the position.
 
     Args:
         xplot: x values.
-        EVEC (ndarray): Array of the wavefunctions.
-        minEV (int): Lower bound of eigenvalues to calculate the expected
+        evec (ndarray): Array of the wavefunctions.
+        min_ev (int): Lower bound of eigenvalues to calculate the expected
             square positions of.
-        maxEV (int): Upper bound of eigenvalues to calculate the expected
+        max_ev (int): Upper bound of eigenvalues to calculate the expected
             square postions of.
 
     Returns:
@@ -117,29 +116,29 @@ def expected_x_square(xplot, EVEC, minEV, maxEV):
             position from the minEV eigenvalue to the maxEV eigenvalue.
     """
     delta = abs(xplot[0] - xplot[1])
-    expx2 = np.zeros((maxEV - minEV + 1, ), dtype=float)
-    for ii in range(minEV - 1, maxEV):
-        xx = delta * np.sum(EVEC[:, ii] * xplot**2 * EVEC[:, ii])
+    expx2 = np.zeros((max_ev - min_ev + 1, ), dtype=float)
+    for ii in range(min_ev - 1, max_ev):
+        xx = delta * np.sum(evec[:, ii] * xplot**2 * evec[:, ii])
         expx2[ii] = xx
     return expx2
 
 
-def uncertainty(xplot, EVEC, minEV, maxEV):
+def uncertainty(xplot, evec, min_ev, max_ev):
     """Calculates the uncertainty of the expected position.
 
     Args:
         xplot: x values.
-        EVEC (ndarray): Array of the wavefunctions.
-        minEV (int): Lower bound of eigenvalues to calculate the uncertainty
+        evec (ndarray): Array of the wavefunctions.
+        min_ev (int): Lower bound of eigenvalues to calculate the uncertainty
             of.
-        maxEV (int): Upper bound of eigenvalues to calculate the uncertainty
+        max_ev (int): Upper bound of eigenvalues to calculate the uncertainty
             of.
 
     Retruns:
         uncertainty (1darray): Array containing the uncertainties of the
             the expected positions."""
-    expx = expected_values(xplot, EVEC, minEV, maxEV)
-    expx2 = expected_x_square(xplot, EVEC, minEV, maxEV)
+    expx = expected_values(xplot, evec, min_ev, max_ev)
+    expx2 = expected_x_square(xplot, evec, min_ev, max_ev)
     uncertainty = np.sqrt(expx2 - expx * expx)
     return uncertainty
 
