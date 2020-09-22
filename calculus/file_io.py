@@ -46,16 +46,16 @@ def read_schrodinger(directory, file):
     alldata = dict()
 
     massstring = list_of_data[0]
-    alldata['_MASS'] = getvalue(massstring)[0]
+    alldata['_MASS'] = _getvalue(massstring)[0]
 
     interpolationstring = list_of_data[1]
-    alldata['_XMIN'] = getvalue(interpolationstring)[0]
-    alldata['_XMAX'] = getvalue(interpolationstring)[1]
-    alldata['_NPOINT'] = int(getvalue(interpolationstring)[2])
+    alldata['_XMIN'] = _getvalue(interpolationstring)[0]
+    alldata['_XMAX'] = _getvalue(interpolationstring)[1]
+    alldata['_NPOINT'] = int(_getvalue(interpolationstring)[2])
 
     EVstring = list_of_data[2]
-    alldata['_MIN_EV'] = int(getvalue(EVstring)[0])
-    alldata['_MAX_EV'] = int(getvalue(EVstring)[1])
+    alldata['_MIN_EV'] = int(_getvalue(EVstring)[0])
+    alldata['_MAX_EV'] = int(_getvalue(EVstring)[1])
 
     inttypestring = list_of_data[3]
     seperator = '\t' if '\t' in inttypestring else ' '
@@ -63,7 +63,7 @@ def read_schrodinger(directory, file):
     alldata['_REG_TYPE'] = alldata['_REG_TYPE'].replace("\n", "")
 
     intpointsstring = list_of_data[4]
-    alldata['_INTERPOLATE_NR'] = getvalue(intpointsstring)[0]
+    alldata['_INTERPOLATE_NR'] = _getvalue(intpointsstring)[0]
 
     alldata['_POT'] = np.loadtxt(filepath, skiprows=5)
 
