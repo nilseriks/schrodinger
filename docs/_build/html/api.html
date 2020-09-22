@@ -24,7 +24,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Here will be API documentation soon!" href="index.html" />
+    <link rel="prev" title="Welcome to Schrodinger!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -41,121 +41,6 @@
             
   <div class="section" id="api-documentation">
 <h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-file_io">
-<span id="file-io"></span><h2>File-IO<a class="headerlink" href="#module-file_io" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="file_io.create_files">
-<code class="descclassname">file_io.</code><code class="descname">create_files</code><span class="sig-paren">(</span><em>filepath</em>, <em>endata</em>, <em>expxdata</em>, <em>potdata</em>, <em>wfdata</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.create_files" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates files containing the energies (<cite>energies.dat</cite>), expected values for
-x and thier uncertainities (<cite>expvalues.dat</cite>), the potentials and their
-corresponding x-values (<cite>potential.dat</cite>) and the eigenstates with their
-corresponding x_values (<cite>wavefuncs.dat</cite>)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>filepath</strong> – Filepath of the destination, in which the files should be</li>
-<li><strong>saved</strong> – </li>
-<li><strong>endata</strong> – array containing data dedicated to <cite>energies.dat</cite></li>
-<li><strong>expxdata</strong> – array containing data dedicated to <cite>expvalues.dat</cite></li>
-<li><strong>potdata</strong> – array containing data dedicated to <cite>potential.dat</cite></li>
-<li><strong>wfdata</strong> – array containing data dedicated to <cite>wavefuncs.dat</cite></li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="file_io.read_data">
-<code class="descclassname">file_io.</code><code class="descname">read_data</code><span class="sig-paren">(</span><em>directory</em>, <em>fname</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.read_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read a file and extract the contant as an array.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>directory</strong> – Directory which contains the file.</li>
-<li><strong>Name of the file.</strong> (<em>fname.</em>) – </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Array of content.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="file_io.read_files">
-<code class="descclassname">file_io.</code><code class="descname">read_files</code><span class="sig-paren">(</span><em>filepath</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.read_files" title="Permalink to this definition">¶</a></dt>
-<dd><p>reads four different files and converts them into arrays</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>filepath</strong> – Filepath of , <cite>energies.dat</cite>, <cite>expvalues.dat, `potential.dat</cite></li>
-<li><strong>wavefuncs.dat</strong> (<em>and</em>) – </li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array containing energies of their corresponding eigenstates
-expxdata: array containing expected values for x and their
-uncerainnities
-potdata: array containing potentials and corresponding x-values
-wfdata: array containing eigenstates and corresponding x-values</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">endata</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="file_io.read_schrodinger">
-<code class="descclassname">file_io.</code><code class="descname">read_schrodinger</code><span class="sig-paren">(</span><em>directory</em>, <em>file</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.read_schrodinger" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the file “schrodinger.inp” containing special formated user data
-describing the problem</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filepath</strong> – Filepath of “schrodinger.inp”</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary containing the needed data for further calculations</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">alldata</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="file_io.write_result">
-<code class="descclassname">file_io.</code><code class="descname">write_result</code><span class="sig-paren">(</span><em>directory</em>, <em>fname</em>, <em>array</em><span class="sig-paren">)</span><a class="headerlink" href="#file_io.write_result" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write an array in a file.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>directory</strong> – Directory where to write the file.</li>
-<li><strong>fname</strong> – Name of the file.</li>
-<li><strong>array</strong> – Array to write into fname.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
 <div class="section" id="module-calc">
 <span id="calculations"></span><h2>Calculations<a class="headerlink" href="#module-calc" title="Permalink to this headline">¶</a></h2>
 <p>Module which contains all functions for numerical calculations.</p>
@@ -239,10 +124,44 @@ describing the problem</p>
 </table>
 </dd></dl>
 
+<p>Following code is a snippet of the calc module. It shows the function
+interpolating the potential based on the user input.</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.interpolate</span>
+<span class="kn">import</span> <span class="nn">calculus</span>
+
+
+<span class="k">def</span> <span class="nf">pot_calc</span><span class="p">(</span><span class="n">xplot</span><span class="p">,</span> <span class="n">discrete_pot</span><span class="p">,</span> <span class="n">interpoltype</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Interpolates the Potential for given data points.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xplot: Array of the x values.</span>
+<span class="sd">        pot: Array with the data points of the potential.</span>
+<span class="sd">        interpoltype: Type of the interpolation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        VV: Array with values of the potential at the points of xplot.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">discrete_pot</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">discrete_pot</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">interpoltype</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
+        <span class="n">VV</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">VV</span><span class="p">(</span><span class="n">xplot</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">interpoltype</span> <span class="o">==</span> <span class="s1">&#39;polynomial&#39;</span><span class="p">:</span>
+        <span class="n">VV</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">interpolate</span><span class="o">.</span><span class="n">barycentric_interpolate</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">xplot</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">VV</span>
+    <span class="k">elif</span> <span class="n">interpoltype</span> <span class="o">==</span> <span class="s1">&#39;cspline&#39;</span><span class="p">:</span>
+        <span class="n">VV</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">interpolate</span><span class="o">.</span><span class="n">CubicSpline</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">bc_type</span><span class="o">=</span><span class="s1">&#39;natural&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">VV</span><span class="p">(</span><span class="n">xplot</span><span class="p">)</span>
+</pre></div>
 </div>
-<div class="section" id="visualization">
-<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-visualizer"></span><p>This script visualizes the wavefunctions of a given potential.</p>
+</div></blockquote>
+</div>
+<div class="section" id="module-visualizer">
+<span id="visualization"></span><h2>Visualization<a class="headerlink" href="#module-visualizer" title="Permalink to this headline">¶</a></h2>
+<p>This script visualizes the wavefunctions of a given potential.</p>
 <dl class="function">
 <dt id="visualizer.main">
 <code class="descclassname">visualizer.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#visualizer.main" title="Permalink to this definition">¶</a></dt>
@@ -281,6 +200,99 @@ eigenvalue.</li>
 </table>
 </dd></dl>
 
+<p>Following code is a snippet of the visualizer module. It shows the function
+that creates the graphical interpretation of the plot.</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pot_plot</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">minEV</span><span class="p">,</span> <span class="n">maxEV</span><span class="p">,</span> <span class="n">EVAL</span><span class="p">,</span> <span class="n">EVEC</span><span class="p">,</span> <span class="n">pot</span><span class="p">,</span> <span class="n">xplot</span><span class="p">,</span> <span class="n">ydiff</span><span class="p">,</span> <span class="n">expx</span><span class="p">,</span> <span class="n">unc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a graphical plot. It shows the potential, the eigenvalues, the</span>
+<span class="sd">    wavefunctions, the expected values of the position of the particle. And</span>
+<span class="sd">    within a second plot it shows the uncertainty of the expected position.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        xmin: Lower bound of the x values.</span>
+<span class="sd">        xmax: Upper bound of the x values.</span>
+<span class="sd">        minEV: Lower bound of the eigenvalues which should be visualized.</span>
+<span class="sd">        maxEV: Upper bound of the eigenvalues which should be visualized.</span>
+<span class="sd">        EVAL: Array of eigenvalues.</span>
+<span class="sd">        EVEC: Array containing the wavefunctions as column vectors.</span>
+<span class="sd">        pot: Interpolation of the potential at the xplot values.</span>
+<span class="sd">        xplot: Values were the potential is defined.</span>
+<span class="sd">        ydiff: Absolute difference between the lowest pot-value and the highest</span>
+<span class="sd">               eigenvalue.</span>
+<span class="sd">        expx: Expected values of the position.</span>
+<span class="sd">        unc: Uncertainty of the position.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ATOL</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">ydiff</span>
+    <span class="n">RTOL</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">ydiff</span>
+    <span class="n">_YMIN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">amin</span><span class="p">(</span><span class="n">pot</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">ydiff</span>
+    <span class="n">_max_scale</span> <span class="o">=</span> <span class="n">_scale_plot</span><span class="p">(</span><span class="n">minEV</span><span class="p">,</span> <span class="n">maxEV</span><span class="p">,</span> <span class="n">EVAL</span><span class="p">,</span> <span class="n">EVEC</span><span class="p">,</span> <span class="n">maxEV</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">RTOL</span><span class="p">,</span> <span class="n">ATOL</span><span class="p">)</span>
+    <span class="n">_YMAX</span> <span class="o">=</span> <span class="n">EVAL</span><span class="p">[</span><span class="n">maxEV</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">_max_scale</span> <span class="o">*</span> <span class="n">EVEC</span><span class="p">[:,</span> <span class="n">maxEV</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">ydiff</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xmin</span> <span class="o">-</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xmin</span><span class="p">),</span> <span class="n">xmax</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">xmax</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">_YMIN</span><span class="p">,</span> <span class="n">_YMAX</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Potential, eigenstates, &lt;x&gt;&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [Bohr]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Energie [Hartree]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minEV</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxEV</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ii</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">_COLOR</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_COLOR</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">EVAL</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+                   <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">_SCALE</span> <span class="o">=</span> <span class="n">_scale_plot</span><span class="p">(</span><span class="n">minEV</span><span class="p">,</span> <span class="n">maxEV</span><span class="p">,</span> <span class="n">EVAL</span><span class="p">,</span> <span class="n">EVEC</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">RTOL</span><span class="p">,</span> <span class="n">ATOL</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">expx</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">EVAL</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                 <span class="n">markeredgewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xplot</span><span class="p">,</span> <span class="n">_SCALE</span> <span class="o">*</span> <span class="n">EVEC</span><span class="p">[:,</span> <span class="n">ii</span><span class="p">]</span> <span class="o">+</span> <span class="n">EVAL</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">_COLOR</span><span class="p">,</span>
+                 <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xplot</span><span class="p">,</span> <span class="n">pot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">minEV</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxEV</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">EVAL</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightgray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+                   <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">unc</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">EVAL</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;magenta&#39;</span><span class="p">,</span>
+                 <span class="n">markersize</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">markeredgewidth</span><span class="o">=</span><span class="mf">1.85</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">unc</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">unc</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">_YMIN</span><span class="p">,</span> <span class="n">_YMAX</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;sigma x&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;[Bohr]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="module-solver">
+<span id="execution"></span><h2>Execution<a class="headerlink" href="#module-solver" title="Permalink to this headline">¶</a></h2>
+<p>Main environment to solve the one dimensional time independent schrodinger
+equation for diffrent potentials. It writes the energies into energies.dat,
+the wavefunctions into wavefuncs.dat, the potential into potential.dat and
+the expected values of the position into expvalues.dat.</p>
+<dl class="function">
+<dt id="solver.main">
+<code class="descclassname">solver.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solver.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function to solve the one dimensiional time independent schrodinger
+equation.</p>
+</dd></dl>
+
 </div>
 </div>
 
@@ -293,7 +305,7 @@ eigenvalue.</li>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Here will be API documentation soon!</a></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Schrodinger!</a></li>
   </ul></li>
 </ul>
 </div>
