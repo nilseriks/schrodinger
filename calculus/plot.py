@@ -23,7 +23,7 @@ def _scale_plot(min_ev, max_ev, energy, evec, index_ev, rtol, atol):
         atol (float): Absolute tolerence to compare different eigenvalues
 
     Returns:
-        scale (int): Multiplication factor which scales the eigenvectors
+        int: Multiplication factor which scales the eigenvectors
     """
     diff_list = []
 

@@ -14,7 +14,7 @@ def pot_calc(xplot, discrete_pot, interpoltype):
         interpoltype (str): Type of the interpolation.
 
     Returns:
-        VV (1darray): Array with values of the potential at the points of xplot.
+        1darray: Array with values of the potential at the points of xplot.
     """
     xx = discrete_pot[:, 0]
     yy = discrete_pot[:, 1]
@@ -42,8 +42,8 @@ def _solve_seq(xmin, xmax, npoint, mass, pot):
         pot (1darray): Discret potential at the x values.
 
     Returns:
-        EVAL (1darray): Array containing the eigenvalues.
-        EVEC (ndarray): Array containing the eigenvectors as column vectors.
+        1darray: Array containing the eigenvalues.
+        ndarray: Array containing the eigenvectors as column vectors.
     """
     _DELTA = abs(xmin - xmax) / npoint
     _CONST = 1 / (mass * _DELTA**2)
@@ -68,7 +68,7 @@ def get_WF_array(xplot, min_ev, max_ev, evec):
         evec (ndarray): Array of the eigenvectors.
 
     Returns:
-        WF (ndarray): Array in the described format.
+        ndarray: Array in the described format.
     """
     delta = abs(xplot[0] - xplot[1])
     WF = np.array([xplot])
@@ -91,7 +91,7 @@ def expected_values(xplot, evec, min_ev, max_ev):
         max_ev (int): Upper bound of the eigenvalues.
 
     Returns:
-        expectedx (1darray): Array containing expected values of the position.
+        1darray: Array containing expected values of the position.
     """
     delta = abs(xplot[0] - xplot[1])
     expectedx = np.zeros((max_ev - min_ev + 1, ), dtype=float)
@@ -113,7 +113,7 @@ def expected_x_square(xplot, evec, min_ev, max_ev):
             square postions of.
 
     Returns:
-        expx2 (1darray): Array containing the expected values of the square
+        1darray: Array containing the expected values of the square
             position from the minEV eigenvalue to the maxEV eigenvalue.
     """
     delta = abs(xplot[0] - xplot[1])
@@ -136,8 +136,7 @@ def uncertainty(xplot, evec, min_ev, max_ev):
             of.
 
     Retruns:
-        uncertainty (1darray): Array containing the uncertainties of the
-            the expected positions.
+        1darray: Array containing the uncertainties of the expected positions.
     """
     expx = expected_values(xplot, evec, min_ev, max_ev)
     expx2 = expected_x_square(xplot, evec, min_ev, max_ev)
@@ -155,8 +154,8 @@ def get_exp_unc(expx, unc):
             expected values.
 
     Returns:
-        expvalues (2darray): Expected values as colum vector and uncertainties
-            as second colum vector.
+        2darray: Expected values as colum vector and uncertainties as second
+          colum vector.
     """
     expvalues = np.vstack((expx, unc))
     expvalues = np.transpose(expvalues)

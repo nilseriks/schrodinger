@@ -46,6 +46,9 @@ interpolating the potential based on the user input.
 Visualization
 =============
 
+.. automodule:: plot
+   :members:
+
 .. automodule:: visualizer
    :members:
 

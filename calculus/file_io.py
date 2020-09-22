@@ -14,7 +14,7 @@ def _getvalue(string_with_data):
         string_with_data (str): String the numbers should be read out of
 
     Returns:
-        numbers (int): Numbers that were included in the input string
+        int: Numbers that were included in the input string
     """
     aa = string_with_data
     hashindex = string_with_data.find('#')
@@ -34,8 +34,7 @@ def read_schrodinger(directory, file):
         filepath (str): Filepath of "schrodinger.inp"
 
     Returns:
-        alldata (dict): Dictionary containing the needed data for further
-          calculations
+        dict: Dictionary containing the needed data for further calculations
     """
 
     filepath = directory + '/' + file
@@ -88,7 +87,7 @@ def read_data(directory, fname):
         fname (str): Name of the file.
 
     Returns:
-        data (ndarray): Array of content.
+        ndarray: Array of content.
     """
     data = np.loadtxt(os.path.join(directory, fname))
     return data
@@ -102,14 +101,10 @@ def read_files(filepath):
          `potential.dat` and `wavefuncs.dat`
 
     Returns:
-        endata (1darray): array containing energies of their corresponding
-          eigenstates
-        expxdata (1darray): array containing expected values for x and their
-          uncerainties
-        potdata (2darray): array containing potentials and corresponding
-          x-values
-        wfdata (ndarray): array containing eigenstates and corresponding
-          x-values
+        1darray: array containing energies of their corresponding eigenstates
+        1darray: array containing expected values for x and their uncerainties
+        2darray: array containing potentials and corresponding x-values
+        ndarray: array containing eigenstates and corresponding x-values
     """
     enfile = os.path.join(filepath, "energies.dat")
     expxfile = os.path.join(filepath, "expvalues.dat")
