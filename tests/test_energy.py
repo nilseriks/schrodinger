@@ -21,7 +21,7 @@ _LIST = [('inf_square_well.inp', 'E_inf_square_well.dat'),
 
 @pytest.mark.parametrize('problem', _LIST)
 def test_energy(problem):
-    """Testing environment for the energies of the following physical problems,
+    """Testing environment for the energies of the following physical problems
     with specific tolarence:
         infinite square well (rtol=1e-02, atol=1e-12)
         finite square well (rtol=1e-15, atol=1e-15)

@@ -86,7 +86,7 @@ def expected_values(xplot, evec, min_ev, max_ev):
     Args:
         xplot (1darray): x values.
         evec (ndarray): Array of the eigenvectors to calculate the expected
-		position of.
+          position of.
         min_ev (int): Lower bound of the eigenvalues.
         max_ev (int): Upper bound of the eigenvalues.
 

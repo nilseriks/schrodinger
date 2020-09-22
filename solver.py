@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Main environment to solve the one dimensional time independent schrodinger
-equation for diffrent potentials. It writes the energies into energies.dat,
+equation for different potentials. It writes the energies into energies.dat,
 the wavefunctions into wavefuncs.dat, the potential into potential.dat and
 the expected values of the position into expvalues.dat."""
 
@@ -14,8 +14,9 @@ _FILE = 'schrodinger5.inp'
 
 
 def main():
-    """Main function to solve the one dimensiional time independent schrodinger
-    equation."""
+    """Main function to solve the one dimensional time independent schrodinger
+    equation.
+    """
     # Read out the informations of the schrodinger.inp file.
     inp = calculus.io.read_schrodinger(_DIRECTORY, _FILE)
 
