@@ -71,8 +71,8 @@ def _pot_fin_square_well():
 def _pot_harm_osc():
     """Calculates the potential of the harmonic oscillator."""
 
-    _XPLOT = _XPLOT = np.linspace(-5, 5, num=1999, endpoint=True)
-    pot = 0.5 * _XPLOT**2
+    xplot = np.linspace(-5, 5, num=1999, endpoint=True)
+    pot = 0.5 * xplot**2
     calculus.file_io.write_result('../tests/test_potential',
                                   'pot_harm_osc.dat', pot)
     return pot

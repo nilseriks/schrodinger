@@ -3,8 +3,8 @@ read a special formated file containing the user input and creating different
 files containing the calculated eigenstates, potential, etc.'''
 
 import os.path
-import numpy as np
 import os
+import numpy as np
 
 
 def _getvalue(string_with_data):
@@ -20,7 +20,7 @@ def _getvalue(string_with_data):
     aa = string_with_data
     hashindex = string_with_data.find('#')
     newstr = ''.join((ch if ch in '0123456789.-e' else ' ')
-                        for ch in aa[0:hashindex])
+                     for ch in aa[0:hashindex])
 
     numbers = [float(i) for i in newstr.split()]
 
@@ -53,9 +53,9 @@ def read_schrodinger(directory, file):
     alldata['_XMAX'] = _getvalue(interpolationstring)[1]
     alldata['_NPOINT'] = int(_getvalue(interpolationstring)[2])
 
-    EVstring = list_of_data[2]
-    alldata['_MIN_EV'] = int(_getvalue(EVstring)[0])
-    alldata['_MAX_EV'] = int(_getvalue(EVstring)[1])
+    ev_string = list_of_data[2]
+    alldata['_MIN_EV'] = int(_getvalue(ev_string)[0])
+    alldata['_MAX_EV'] = int(_getvalue(ev_string)[1])
 
     inttypestring = list_of_data[3]
     seperator = '\t' if '\t' in inttypestring else ' '
@@ -67,7 +67,7 @@ def read_schrodinger(directory, file):
 
     alldata['_POT'] = np.loadtxt(filepath, skiprows=5)
 
-    return(alldata)
+    return alldata
 
 
 def write_result(directory, fname, array):

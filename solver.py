@@ -4,8 +4,8 @@ equation for diffrent potentials. It writes the energies into energies.dat,
 the wavefunctions into wavefuncs.dat, the potential into potential.dat and
 the expected values of the position into expvalues.dat."""
 
-import calculus
 import numpy as np
+import calculus
 
 
 _DIRECTORY = 'files'
@@ -24,8 +24,8 @@ def main():
 
     pot = calculus.calc.pot_calc(xplot, inp['_POT'], inp['_REG_TYPE'])
 
-    energy, evec = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
-                                            inp['_NPOINT'], inp['_MASS'], pot)
+    energy, evec = calculus.calc.solve_seq(inp['_XMIN'], inp['_XMAX'],
+                                           inp['_NPOINT'], inp['_MASS'], pot)
 
     energy = energy[inp['_MIN_EV'] - 1: inp['_MAX_EV']]
 
