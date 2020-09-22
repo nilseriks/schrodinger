@@ -1,4 +1,4 @@
-"""Module which contains all functions for numerical calculations."""
+"""Module containing all functions for numerical calculations."""
 
 import numpy as np
 import scipy as sp
@@ -7,7 +7,7 @@ import calculus
 
 
 def pot_calc(xplot, discrete_pot, interpoltype):
-    """Interpolates the Potential for given data points.
+    """Interpolates the potential for given data points.
 
     Args:
         xplot: Array of the x values.
