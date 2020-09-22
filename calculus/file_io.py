@@ -1,11 +1,22 @@
-#!/usr/bin/env python3
+'''File_IO contains various filereading and writing routines. The goal is to
+read a special formated file containing the user input and creating different
+files containing the calculated eigenstates, potential, etc.'''
 
 import os.path
 import numpy as np
 import os
 
 
-def getvalue(string_with_data):
+def _getvalue(string_with_data):
+    '''
+    Searches a string for numbers and strips other characters off of them.
+
+    Args:
+        string_with_data: String the numbers should be read out of
+
+    Returns:
+        numbers: Numbers that were included in the input string
+    '''
     aa = string_with_data
     hashindex = string_with_data.find('#')
     newstr = ''.join((ch if ch in '0123456789.-e' else ' ')

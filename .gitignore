@@ -3,5 +3,5 @@
 __pycache__
 .cache/
 calculus/__pycache__/calc.cpython-36.pyc
-
+/docs/_build
 

@@ -58,9 +58,10 @@ def _solve_seq(xmin, xmax, npoint, mass, pot):
 
 
 def get_WF_array(xplot, minEV, maxEV, evec):
-    """Calculating the Array of the wavefunctions in the
-        x1 Psi1(x1) Psi2(x1)
-        x2 Psi1(x2) Psi2(x2)
+    """
+    Calculating the Array of the wavefunctions in the\n
+    x1 Psi1(x1) Psi2(x1)\n
+    x2 Psi1(x2) Psi2(x2)\n
     format.
 
     Args:

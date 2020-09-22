@@ -13,3 +13,9 @@ Calculations
 
 .. automodule:: calc
    :members:
+
+Visualization
+============
+
+.. automodule:: visualizer
+   :members:
