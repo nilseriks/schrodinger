@@ -167,38 +167,23 @@ def expected_values(xplot, EVEC, minEV, maxEV):
     return expectedx
 
 
-def expected_value(xvalues, wavefcts, exp=1):
-    '''
-    Calculates the expected value of x
-
-    Args:
-        xvalues: array containing the x-values
-        wavefcts: array containing the eigenstates
-    Returns:
-        expectedx: arry containing expected values of x
-    '''
-    delta = np.abs(xvalues[0] - xvalues[-1]) / len(xvalues)
-    expectedx = np.array([])
-    for wf, xx in zip(wavefcts, xvalues):
-        expectedx = np.append(expectedx, [np.sum((wf ** 2) * (xx ** exp))
-                                            * delta], axis=0)
-
-    return expectedx
+def expected_x_square(xplot, EVEC, minEV, maxEV):
+    delta = abs(xplot[0] - xplot[1])
+    expx2 = np.zeros((maxEV - minEV + 1, ), dtype=float)
+    for ii in range(minEV - 1, maxEV):
+        xx = delta * np.sum(EVEC[:, ii] * xplot**2 * EVEC[:, ii])
+        expx2[ii] = xx
+    return expx2
 
 
-def uncertainties(xvalues, wavefcts):
-    '''
-    Calculates the uncertainties of the x-values
+def uncertainty(xplot, EVEC, minEV, maxEV):
+    expx = expected_values(xplot, EVEC, minEV, maxEV)
+    expx2 = expected_x_square(xplot, EVEC, minEV, maxEV)
+    uncertainty = np.sqrt(expx2 - expx * expx)
+    return uncertainty
 
-    Args:
-        xvalues: array containing the x-values
-        wavefcts: array containing the eigenstates
-    Returns:
-        uncert: Uncertainties of x
-    '''
-    expx = expected_value(xvalues, wavefcts, 1)
-    expxsquared = expected_value(xvalue, wavefcts, 2)
 
-    uncert = expx - expxsquared
-
-    return uncert
+def get_exp_unc(expx, unc):
+    expvalues = np.vstack((expx, unc))
+    expvalues = np.transpose(expvalues)
+    return expvalues

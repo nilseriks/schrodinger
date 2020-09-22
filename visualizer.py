@@ -33,7 +33,7 @@ def _scale_plot(minEV, maxEV, EVAL, EVEC, indexEV, RTOL, ATOL):
     return _SCALE
 
 
-def pot_plot(xmin, xmax, minEV, maxEV, EVAL, EVEC, pot, xplot, ydiff):
+def pot_plot(xmin, xmax, minEV, maxEV, EVAL, EVEC, pot, xplot, ydiff, expx, unc):
     """Creates a graphical plot. It shows the potential, the eigenvalues, the
     wavefunctions, the expected values of the position of the particle. And
     within a second plot it shows the uncertainty of the expected position.
@@ -49,20 +49,24 @@ def pot_plot(xmin, xmax, minEV, maxEV, EVAL, EVEC, pot, xplot, ydiff):
         xplot: Values were the potential is defined.
         ydiff: Absolute difference between the lowest pot-value and the highest
                eigenvalue.
+        expx: Expected values of the position.
+        unc: Uncertainty of the position.
     """
     ATOL = 0.05 * ydiff
     RTOL = 0.05 * ydiff
     _YMIN = np.amin(pot) - 0.05 * ydiff
     _max_scale = _scale_plot(minEV, maxEV, EVAL, EVEC, maxEV - 1, RTOL, ATOL)
     _YMAX = EVAL[maxEV - 1] + np.amax(_max_scale * EVEC[:, maxEV - 1]) + 0.05 * ydiff
-    plt.figure(figsize=(4, 6), dpi=80)
+
+    plt.figure(figsize=(9, 6), dpi=80)
+    plt.subplot(1, 2, 1)
     plt.xlim(xmin - 0.05 * abs(xmin), xmax + 0.05 * xmax)
     plt.ylim(_YMIN, _YMAX)
     ax = plt.gca()
-    ax.spines['top'].set_linewidth(1)
-    ax.spines['right'].set_linewidth(1)
-    ax.spines['bottom'].set_linewidth(1)
-    ax.spines['left'].set_linewidth(1)
+    ax.spines['top'].set_linewidth(1.2)
+    ax.spines['right'].set_linewidth(1.2)
+    ax.spines['bottom'].set_linewidth(1.2)
+    ax.spines['left'].set_linewidth(1.2)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
     plt.title('Potential, eigenstates, <x>', fontsize=16)
@@ -77,9 +81,30 @@ def pot_plot(xmin, xmax, minEV, maxEV, EVAL, EVEC, pot, xplot, ydiff):
         plt.hlines(EVAL[ii], xmin, xmax, color='lightgray', linewidth=2.5,
                    zorder=1)
         _SCALE = _scale_plot(minEV, maxEV, EVAL, EVEC, ii, RTOL, ATOL)
+        plt.plot(expx[ii], EVAL[ii], 'x', color='green', markersize=12,
+                 markeredgewidth=1.5, zorder=3)
         plt.plot(xplot, _SCALE * EVEC[:, ii] + EVAL[ii], color=_COLOR,
                  linewidth=2.5, zorder=2)
     plt.plot(xplot, pot, color='black', linewidth=2, zorder=0)
+
+    plt.subplot(1, 2, 2)
+    for ii in range(minEV - 1, maxEV):
+        plt.hlines(EVAL[ii], xmin, xmax, color='lightgray', linewidth=2.5,
+                   zorder=1)
+        plt.plot(unc[ii], EVAL[ii], marker='+', color='magenta',
+                 markersize=17, markeredgewidth=1.85, zorder=2)
+    plt.xlim(0, np.amax(unc) + 0.1 * np.amax(unc))
+    plt.ylim(_YMIN, _YMAX)
+    plt.yticks([])
+    plt.xticks(fontsize=14)
+    plt.title('sigma x', fontsize=16)
+    plt.xlabel('[Bohr]', fontsize=16)
+    ax = plt.gca()
+    ax.spines['top'].set_linewidth(1.2)
+    ax.spines['right'].set_linewidth(1.2)
+    ax.spines['bottom'].set_linewidth(1.2)
+    ax.spines['left'].set_linewidth(1.2)
+
     plt.show()
 
 
@@ -88,6 +113,8 @@ def main():
     wavefunctions, the expected values of the position of the particle. It
     reads out the data which were calculated by the solver."""
     _DATA = calculus.file_io.read_files('files')
+    _EXPX = _DATA[1][:, 0]
+    _UNC = _DATA[1][:, 1]
     _XPLOT = _DATA[2][:, 0]
     _XMIN = np.amin(_XPLOT)
     _XMAX = np.amax(_XPLOT)
@@ -100,7 +127,7 @@ def main():
     _YDIFF = abs(_EVAL[_MAX_EV - 1] - np.amin(_POT))
 
     pot_plot(_XMIN, _XMAX, _MIN_EV, _MAX_EV, _EVAL, _EVEC, _POT, _XPLOT,
-             _YDIFF)
+             _YDIFF, _EXPX, _UNC)
 
 
 if __name__ == '__main__':

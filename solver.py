@@ -36,9 +36,14 @@ def main():
     _EXPECTEDX = calculus.calc.expected_values(_XPLOT, _EVEC, inp['_MIN_EV'],
                                                inp['_MAX_EV'])
 
+    _UNCERTAINTY = calculus.calc.uncertainty(_XPLOT, _EVEC, inp['_MIN_EV'],
+                                             inp['_MAX_EV'])
+
+    _EXP_VALUES = calculus.calc.get_exp_unc(_EXPECTEDX, _UNCERTAINTY)
+
     _POTX = np.transpose(np.vstack((_XPLOT, _POT)))
 
-    calculus.file_io.create_files(_DIRECTORY, _EVAL, _EXPECTEDX, _POTX, xevec)
+    calculus.file_io.create_files(_DIRECTORY, _EVAL, _EXP_VALUES, _POTX, xevec)
 
 
 if __name__ == '__main__':
