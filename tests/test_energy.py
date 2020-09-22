@@ -46,29 +46,3 @@ def test_energy(problem):
         assert np.allclose(expectedE, calculatedE, rtol=1e-02, atol=1e-12)
     else:
         assert np.allclose(expectedE, calculatedE, rtol=1e-15, atol=1e-15)
-
-
-
-
-'''
-def wf_inf_square_well(xplot, xmin, xmax, npoint, wf_number):
-    _LENGTH = abs(xmin - xmax)
-    PSI = np.zeros((npoint, wf_number), dtype=float)
-    for nn in range(wf_number):
-        PSI[:, nn] = np.sqrt(2 / _LENGTH) * np.sin((nn + 1) * np.pi * xplot
-                             / _LENGTH)
-    return PSI
-
-#_POT2 = calculus.calc.pot_calc(_XPLOT, _POT, 'linear')
-print(wf_inf_square_well(_XPLOT2, 0, 4, _NPOINT, 20))
-print(calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, 1, _POT2)[1][:, 0:20])
-
-
-def test_inf_square_well():
-    _POT2 = calculus.calc.pot_calc(_XPLOT, _POT, 'linear')
-    AA = wf_inf_square_well(_XPLOT2, 0, 4, _NPOINT, 20)
-    BB = calculus.calc._solve_seq(_XMIN, _XMAX, _NPOINT, 1, _POT2)[1][:, 0:20]
-    for nn in range(20):
-        BB[:, nn] = BB[:, nn] * 1 / np.sum(BB[:, nn])
-    assert np.allclose(AA, BB, rtol=1, atol=1)
-    '''

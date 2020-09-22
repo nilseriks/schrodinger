@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Module which contains all functions for numerical calculations."""
 
 import numpy as np
@@ -83,72 +82,6 @@ def get_WF_array(xplot, minEV, maxEV, evec):
     return WF
 
 
-def _energy_inf_square_well(maxEV):
-    """Calculates the energies of the infinite square well for the first maxEV
-    eigenvalues.
-
-    Args:
-        EVmax: Set the upper bound for the eigenvalues to calculate.
-
-    Returns:
-        energy: Array containing the calculated eigenvalues."""
-    energy = np.zeros((maxEV, ), dtype=float)
-    for nn in range(0, maxEV):
-        energy[nn] = np.pi**2 * (nn + 1)**2 / (2 * 2 * (-2 - 2)**2)
-    calculus.file_io.write_result('tests/test_energy',
-                                  'E_inf_square_well.dat', energy)
-    return energy
-
-
-def _energy_harm_osc(maxEV):
-    """Calculates the energies of the harmonic oscillator for given number of
-    eigenvalues.
-
-    Args:
-        EVmin: Set the lower bound for the eigenvalues to calculate.
-        EVmax: Set the upper bound for the eigenvalues to calculate.
-
-    Returns:
-        energy: Array containing the calculated eigenvalues."""
-    energy = np.zeros((maxEV, ), dtype=float)
-    for nn in range(maxEV):
-        energy[nn] = 0.5 * nn + 0.25
-    calculus.file_io.write_result('tests/test_energy', 'E_harm_osc.dat',
-                                  energy)
-    return energy
-
-
-def _pot_inf_square_well():
-    """Calculates the potential of the ininite square well problem."""
-
-    pot = np.zeros((1999, ), dtype=float)
-    calculus.file_io.write_result('tests/test_potential',
-                                  'pot_inf_square_well.dat', pot)
-    return pot
-
-
-def _pot_fin_square_well():
-    """Calculates the potential of the finite square well problem."""
-
-    pot1 = np.zeros((750, ), dtype=float)
-    pot2 = -10 * np.ones((499, ), dtype=float)
-    pot3 = np.zeros((750, ), dtype=float)
-    pot = np.concatenate((pot1, pot2, pot3), axis=0)
-    calculus.file_io.write_result('./../tests/test_potential',
-                                  'pot_fin_square_well.dat', pot)
-    return pot
-
-
-def _pot_harm_osc():
-    """Calculates the potential of the harmonic oscillator."""
-
-    _XPLOT = _XPLOT = np.linspace(-5, 5, num=1999, endpoint=True)
-    pot = 0.5 * _XPLOT**2
-    calculus.file_io.write_result('tests/test_potential',
-                                  'pot_harm_osc.dat', pot)
-    return pot
-
-
 def expected_values(xplot, EVEC, minEV, maxEV):
     """Calculates the expected value of the position.
 
@@ -169,6 +102,20 @@ def expected_values(xplot, EVEC, minEV, maxEV):
 
 
 def expected_x_square(xplot, EVEC, minEV, maxEV):
+    """Calculates the expected values of the square of the position.
+
+    Args:
+        xplot: x values.
+        EVEC (ndarray): Array of the wavefunctions.
+        minEV (int): Lower bound of eigenvalues to calculate the expected
+            square positions of.
+        maxEV (int): Upper bound of eigenvalues to calculate the expected
+            square postions of.
+
+    Returns:
+        expx2 (1darray): Array containing the expected values of the square
+            position from the minEV eigenvalue to the maxEV eigenvalue.
+    """
     delta = abs(xplot[0] - xplot[1])
     expx2 = np.zeros((maxEV - minEV + 1, ), dtype=float)
     for ii in range(minEV - 1, maxEV):
@@ -178,6 +125,19 @@ def expected_x_square(xplot, EVEC, minEV, maxEV):
 
 
 def uncertainty(xplot, EVEC, minEV, maxEV):
+    """Calculates the uncertainty of the expected position.
+
+    Args:
+        xplot: x values.
+        EVEC (ndarray): Array of the wavefunctions.
+        minEV (int): Lower bound of eigenvalues to calculate the uncertainty
+            of.
+        maxEV (int): Upper bound of eigenvalues to calculate the uncertainty
+            of.
+
+    Retruns:
+        uncertainty (1darray): Array containing the uncertainties of the
+            the expected positions."""
     expx = expected_values(xplot, EVEC, minEV, maxEV)
     expx2 = expected_x_square(xplot, EVEC, minEV, maxEV)
     uncertainty = np.sqrt(expx2 - expx * expx)
@@ -185,6 +145,17 @@ def uncertainty(xplot, EVEC, minEV, maxEV):
 
 
 def get_exp_unc(expx, unc):
+    """Combines the arrays of the expected values and the array of the
+    corresponding uncertainties.
+
+    Args:
+        expx (1darray): Array containing the expected values.
+        unc (1darray): Array containing the uncertainties corresponding to the
+            expected values.
+
+    Returns:
+        expvalues (2darray): Expected values as colum vector and uncertainties
+            as second colum vector."""
     expvalues = np.vstack((expx, unc))
     expvalues = np.transpose(expvalues)
     return expvalues
