@@ -12,25 +12,25 @@ def main():
     wavefunctions, the expected values of the position of the particle. It
     reads out the data which were calculated by the solver.
     """
-    _DATA = calculus.file_io.read_files('files')
-    _EVAL = _DATA[0]
-    _EXPX = _DATA[1][:, 0]
-    _UNC = _DATA[1][:, 1]
-    _XPLOT = _DATA[2][:, 0]
-    _POT = _DATA[2][:, 1:]
-    _EVEC = _DATA[3][:, 1:]
+    data = calculus.file_io.read_files('files')
+    energy = data[0]
+    expectedx = data[1][:, 0]
+    uncertainty = data[1][:, 1]
+    xplot = data[2][:, 0]
+    pot = data[2][:, 1:]
+    evec = data[3][:, 1:]
 
-    _XMIN = np.amin(_XPLOT)
-    _XMAX = np.amax(_XPLOT)
+    xmin = np.amin(xplot)
+    xmax = np.amax(xplot)
 
     inp = calculus.file_io.read_schrodinger('files', 'schrodinger5.inp')
-    _MIN_EV = inp['_MIN_EV']
-    _MAX_EV = inp['_MAX_EV']
+    min_ev = inp['_MIN_EV']
+    max_ev = inp['_MAX_EV']
 
-    _YDIFF = abs(_EVAL[_MAX_EV - 1] - np.amin(_POT))
+    ydiff = abs(energy[max_ev - 1] - np.amin(pot))
 
-    calculus.plot.pot_plot(_XMIN, _XMAX, _MIN_EV, _MAX_EV, _EVAL, _EVEC, _POT,
-                           _XPLOT, _YDIFF, _EXPX, _UNC)
+    calculus.plot.pot_plot(xmin, xmax, min_ev, max_ev, energy, evec, pot,
+                           xplot, ydiff, expectedx, uncertainty)
 
 
 if __name__ == '__main__':
