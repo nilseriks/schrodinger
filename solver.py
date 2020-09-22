@@ -19,30 +19,30 @@ def main():
     # Read out the informations of the schrodinger.inp file.
     inp = calculus.io.read_schrodinger(_DIRECTORY, _FILE)
 
-    _XPLOT = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
-                         endpoint=True)
+    xplot = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
+                        endpoint=True)
 
-    _POT = calculus.calc.pot_calc(_XPLOT, inp['_POT'], inp['_REG_TYPE'])
+    pot = calculus.calc.pot_calc(xplot, inp['_POT'], inp['_REG_TYPE'])
 
-    _EVAL, _EVEC = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
-                                            inp['_NPOINT'], inp['_MASS'], _POT)
+    energy, evec = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
+                                            inp['_NPOINT'], inp['_MASS'], pot)
 
-    _EVAL = _EVAL[inp['_MIN_EV'] - 1: inp['_MAX_EV']]
+    energy = energy[inp['_MIN_EV'] - 1: inp['_MAX_EV']]
 
-    xevec = calculus.calc.get_WF_array(_XPLOT, inp['_MIN_EV'],
-                                            inp['_MAX_EV'], _EVEC)
+    xevec = calculus.calc.get_WF_array(xplot, inp['_MIN_EV'],
+                                       inp['_MAX_EV'], evec)
 
-    _EXPECTEDX = calculus.calc.expected_values(_XPLOT, _EVEC, inp['_MIN_EV'],
-                                               inp['_MAX_EV'])
+    expectedx = calculus.calc.expected_values(xplot, evec, inp['_MIN_EV'],
+                                              inp['_MAX_EV'])
 
-    _UNCERTAINTY = calculus.calc.uncertainty(_XPLOT, _EVEC, inp['_MIN_EV'],
-                                             inp['_MAX_EV'])
+    uncertainty = calculus.calc.uncertainty(xplot, evec, inp['_MIN_EV'],
+                                            inp['_MAX_EV'])
 
-    _EXP_VALUES = calculus.calc.get_exp_unc(_EXPECTEDX, _UNCERTAINTY)
+    exp_values = calculus.calc.get_exp_unc(expectedx, uncertainty)
 
-    _POTX = np.transpose(np.vstack((_XPLOT, _POT)))
+    x_pot = np.transpose(np.vstack((xplot, pot)))
 
-    calculus.file_io.create_files(_DIRECTORY, _EVAL, _EXP_VALUES, _POTX, xevec)
+    calculus.file_io.create_files(_DIRECTORY, energy, exp_values, x_pot, xevec)
 
 
 if __name__ == '__main__':
