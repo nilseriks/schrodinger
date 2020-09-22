@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+"""Containing routines for the file i/o."""
 
 import os.path
 import numpy as np

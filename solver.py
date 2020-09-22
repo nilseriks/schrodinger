@@ -28,7 +28,6 @@ def main():
 
     _EVAL = _EVAL[inp['_MIN_EV'] - 1: inp['_MAX_EV']]
 
-
     xevec = calculus.calc.get_WF_array(_XPLOT, inp['_MIN_EV'],
                                             inp['_MAX_EV'], _EVEC)
 

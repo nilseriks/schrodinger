@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""This script visualizes the wavefunctions of a given potential."""
+"""This script visualizes the wavefunctions of a given potential. It also shows
+the expected values of the position and the corresponding uncertainties."""
 
 
 import numpy as np
@@ -59,20 +60,23 @@ def pot_plot(xmin, xmax, minEV, maxEV, EVAL, EVEC, pot, xplot, ydiff, expx, unc)
     _YMAX = EVAL[maxEV - 1] + np.amax(_max_scale * EVEC[:, maxEV - 1]) + 0.05 * ydiff
 
     plt.figure(figsize=(9, 6), dpi=80)
+
     plt.subplot(1, 2, 1)
     plt.xlim(xmin - 0.05 * abs(xmin), xmax + 0.05 * xmax)
     plt.ylim(_YMIN, _YMAX)
-    ax = plt.gca()
-    ax.spines['top'].set_linewidth(1.2)
-    ax.spines['right'].set_linewidth(1.2)
-    ax.spines['bottom'].set_linewidth(1.2)
-    ax.spines['left'].set_linewidth(1.2)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
     plt.title('Potential, eigenstates, <x>', fontsize=16)
     plt.xlabel('x [Bohr]', fontsize=16)
     plt.ylabel('Energie [Hartree]', fontsize=16)
+
+    ax = plt.gca()
+    ax.spines['top'].set_linewidth(1.2)
+    ax.spines['right'].set_linewidth(1.2)
+    ax.spines['bottom'].set_linewidth(1.2)
+    ax.spines['left'].set_linewidth(1.2)
     ax.xaxis.set_label_position('bottom')
+
     for ii in range(minEV - 1, maxEV):
         if ii % 2 == 0:
             _COLOR = 'blue'
@@ -99,6 +103,7 @@ def pot_plot(xmin, xmax, minEV, maxEV, EVAL, EVEC, pot, xplot, ydiff, expx, unc)
     plt.xticks(fontsize=14)
     plt.title('sigma x', fontsize=16)
     plt.xlabel('[Bohr]', fontsize=16)
+
     ax = plt.gca()
     ax.spines['top'].set_linewidth(1.2)
     ax.spines['right'].set_linewidth(1.2)
@@ -111,19 +116,23 @@ def pot_plot(xmin, xmax, minEV, maxEV, EVAL, EVEC, pot, xplot, ydiff, expx, unc)
 def main():
     """Main function to show the plot of the potential, the eigenvalues, the
     wavefunctions, the expected values of the position of the particle. It
-    reads out the data which were calculated by the solver."""
+    reads out the data which were calculated by the solver.
+    """
     _DATA = calculus.file_io.read_files('files')
+    _EVAL = _DATA[0]
     _EXPX = _DATA[1][:, 0]
     _UNC = _DATA[1][:, 1]
     _XPLOT = _DATA[2][:, 0]
+    _POT = _DATA[2][:, 1:]
+    _EVEC = _DATA[3][:, 1:]
+
     _XMIN = np.amin(_XPLOT)
     _XMAX = np.amax(_XPLOT)
-    _EVAL = _DATA[0]
+
     inp = calculus.file_io.read_schrodinger('files', 'schrodinger5.inp')
     _MIN_EV = inp['_MIN_EV']
     _MAX_EV = inp['_MAX_EV']
-    _POT = _DATA[2][:, 1:]
-    _EVEC = _DATA[3][:, 1:]
+
     _YDIFF = abs(_EVAL[_MAX_EV - 1] - np.amin(_POT))
 
     pot_plot(_XMIN, _XMAX, _MIN_EV, _MAX_EV, _EVAL, _EVEC, _POT, _XPLOT,
