@@ -71,10 +71,12 @@ def main():
 
     if min_ev < max_ev:
         calculus.plot.pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec,
-                                     pot, xplot, ydiff, expectedx, uncertainty)
+                                     pot, xplot, ydiff, expectedx, uncertainty,
+                                     scale)
     else:
         calculus.plot.pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec,
-                                   pot, xplot, ydiff, expectedx, uncertainty)
+                                   pot, xplot, ydiff, expectedx, uncertainty,
+                                   scale)
 
 
 if __name__ == '__main__':
