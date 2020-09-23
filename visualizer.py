@@ -14,8 +14,6 @@ def main():
     """
     data = calculus.file_io.read_files('files')
     energy = data[0]
-    expectedx = data[1][:, 0]
-    uncertainty = data[1][:, 1]
     xplot = data[2][:, 0]
     pot = data[2][:, 1:]
     evec = data[3][:, 1:]
@@ -27,10 +25,24 @@ def main():
     min_ev = inp['_MIN_EV']
     max_ev = inp['_MAX_EV']
 
-    ydiff = abs(energy[max_ev - 1] - np.amin(pot))
+    if min_ev < max_ev:
+        expectedx = data[1][:, 0]
+        uncertainty = data[1][:, 1]
+    elif min_ev == max_ev:
+        expectedx = data[1][0]
+        uncertainty = data[1][1]
 
-    calculus.plot.pot_plot(xmin, xmax, min_ev, max_ev, energy, evec, pot,
-                           xplot, ydiff, expectedx, uncertainty)
+    if min_ev < max_ev:
+        ydiff = abs(energy[max_ev - 1] - np.amin(pot))
+    elif min_ev == max_ev:
+        ydiff = abs(energy - np.amin(pot))
+
+    if min_ev < max_ev:
+        calculus.plot.pot_plot(xmin, xmax, min_ev, max_ev, energy, evec, pot,
+                               xplot, ydiff, expectedx, uncertainty)
+    else:
+        calculus.plot.pot_plot2(xmin, xmax, min_ev, max_ev, energy, evec, pot,
+                                xplot, ydiff, expectedx, uncertainty)
 
 
 if __name__ == '__main__':

@@ -14,19 +14,20 @@ def pot_calc(xplot, discrete_pot, interpoltype):
         interpoltype (str): Type of the interpolation.
 
     Returns:
-        VV (1darray): Array with values of the potential at the points of xplot.
+        vv (1darray): Array with values of the potential at the points of
+            xplot.
     """
     xx = discrete_pot[:, 0]
     yy = discrete_pot[:, 1]
     if interpoltype == 'linear':
-        VV = scipy.interpolate.interp1d(xx, yy, 'linear')
-        return VV(xplot)
+        vv = scipy.interpolate.interp1d(xx, yy, 'linear')
     elif interpoltype == 'polynomial':
-        VV = sp.interpolate.barycentric_interpolate(xx, yy, xplot)
-        return VV
+        vv = sp.interpolate.barycentric_interpolate(xx, yy, xplot)
     elif interpoltype == 'cspline':
-        VV = sp.interpolate.CubicSpline(xx, yy, bc_type='natural')
-        return VV(xplot)
+        vv = sp.interpolate.CubicSpline(xx, yy, bc_type='natural')
+    if interpoltype in ['linear', 'cspline']:
+        vv = vv(xplot)
+    return vv
 
 
 def solve_seq(xmin, xmax, npoint, mass, pot):
@@ -45,17 +46,17 @@ def solve_seq(xmin, xmax, npoint, mass, pot):
         EVAL (1darray): Array containing the eigenvalues.
         EVEC (ndarray): Array containing the eigenvectors as column vectors.
     """
-    _DELTA = abs(xmin - xmax) / npoint
-    _CONST = 1 / (mass * _DELTA**2)
+    delta = abs(xmin - xmax) / npoint
+    const = 1 / (mass * delta**2)
     # Calculating the off diagonal values.
-    OD = - 1 / 2 * _CONST * np.ones((npoint - 1,), dtype=float)
+    OD = - 1 / 2 * const * np.ones((npoint - 1,), dtype=float)
     # Calculating the main diagonal values.
-    MD = pot + _CONST
+    MD = pot + const
     EVAL, EVEC = sp.linalg.eigh_tridiagonal(MD, OD)
     return EVAL, EVEC
 
 
-def get_WF_array(xplot, min_ev, max_ev, evec):
+def get_wf_array(xplot, min_ev, max_ev, evec):
     """Calculates the array of the wavefunctions in the\n
     x1 Psi1(x1) Psi2(x1)\n
     x2 Psi1(x2) Psi2(x2)\n
@@ -68,16 +69,16 @@ def get_WF_array(xplot, min_ev, max_ev, evec):
         evec (ndarray): Array of the eigenvectors.
 
     Returns:
-        WF (ndarray): Array in the described format.
+        wf_array (ndarray): Array in the described format.
     """
     delta = abs(xplot[0] - xplot[1])
-    WF = np.array([xplot])
+    wf_array = np.array([xplot])
     for ii in range(min_ev - 1, max_ev):
         norm = np.sqrt(delta * np.sum(evec[:, ii] * evec[:, ii]))
         evec[:, ii] /= norm
-        WF = np.vstack((WF, evec[:, ii]))
-    WF = np.transpose(WF)
-    return WF
+        wf_array = np.vstack((wf_array, evec[:, ii]))
+    wf_array = np.transpose(wf_array)
+    return wf_array
 
 
 def expected_values(xplot, evec, min_ev, max_ev):

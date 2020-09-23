@@ -29,7 +29,7 @@ def main():
 
     energy = energy[inp['_MIN_EV'] - 1: inp['_MAX_EV']]
 
-    xevec = calculus.calc.get_WF_array(xplot, inp['_MIN_EV'],
+    xevec = calculus.calc.get_wf_array(xplot, inp['_MIN_EV'],
                                        inp['_MAX_EV'], evec)
 
     expectedx = calculus.calc.expected_values(xplot, evec, inp['_MIN_EV'],
