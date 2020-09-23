@@ -3,8 +3,35 @@
 the expected values of the position and the corresponding uncertainties."""
 
 
+import argparse
 import numpy as np
 import calculus
+
+
+_DESCRIPTION = """
+Visualizes the solution of the schrodinger equation."""
+
+
+def _clparsing():
+    """Takes inputs from the command line and passes them to the program
+
+    Returns:
+        dic: Dictionary including the user input from the command line
+    """
+    parser = argparse.ArgumentParser(description=_DESCRIPTION)
+
+    msg = 'Path of the input file'
+    parser.add_argument('-sd', '--sinpdir', default='.', help=msg)
+
+    msg = 'Path of the data files'
+    parser.add_argument('-dd', '--dinpdir', default='.', help=msg)
+
+    msg = 'Scaling factor for the wavefunctions'
+    parser.add_argument('-s', '--scale', default=None, help=msg)
+
+    args = parser.parse_args()
+
+    return args
 
 
 def main():
@@ -12,7 +39,12 @@ def main():
     wavefunctions, the expected values of the position of the particle. It
     reads out the data which were calculated by the solver.
     """
-    data = calculus.file_io.read_files('files')
+    args = _clparsing()
+    sinpdir = args.sinpdir
+    dinpdir = args.dinpdir
+    scale = args.scale
+
+    data = calculus.file_io.read_files(dinpdir)
     energy = data[0]
     xplot = data[2][:, 0]
     pot = data[2][:, 1:]
@@ -21,7 +53,7 @@ def main():
     xmin = np.amin(xplot)
     xmax = np.amax(xplot)
 
-    inp = calculus.file_io.read_schrodinger('files', 'schrodinger5.inp')
+    inp = calculus.file_io.read_schrodinger(sinpdir, 'schrodinger.inp')
     min_ev = inp['_MIN_EV']
     max_ev = inp['_MAX_EV']
 

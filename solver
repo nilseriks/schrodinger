@@ -4,21 +4,48 @@ equation for different potentials. It writes the energies into energies.dat,
 the wavefunctions into wavefuncs.dat, the potential into potential.dat and
 the expected values of the position into expvalues.dat."""
 
+import argparse
 import numpy as np
 import calculus
 
 
+_DESCRIPTION = """
+Solves the schrodinger equation for various problems."""
+
+
+def _clparsing():
+    """Takes inputs from the command line and passes them to the program
+
+    Returns:
+        dic: Dictionary including the user input from the command line
+    """
+    parser = argparse.ArgumentParser(description=_DESCRIPTION)
+
+    msg = 'Path of the input file'
+    parser.add_argument('-id', '--indir', default='.', help=msg)
+
+    msg = 'Path of the output file'
+    parser.add_argument('-od', '--outdir', default='.', help=msg)
+
+    args = parser.parse_args()
+
+    return args
+
+
 _DIRECTORY = 'files'
 
-_FILE = 'schrodinger5.inp'
+_FILE = 'schrodinger.inp'
 
 
 def main():
     """Main function to solve the one dimensional time independent schrodinger
     equation.
     """
+    args = _clparsing()
+    indirectory = args.indir
+    outdirectory = args.outdir
     # Read out the informations of the schrodinger.inp file.
-    inp = calculus.io.read_schrodinger(_DIRECTORY, _FILE)
+    inp = calculus.io.read_schrodinger(indirectory, _FILE)
 
     xplot = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
                         endpoint=True)
@@ -43,7 +70,7 @@ def main():
 
     x_pot = np.transpose(np.vstack((xplot, pot)))
 
-    calculus.file_io.create_files(_DIRECTORY, energy, exp_values, x_pot, xevec)
+    calculus.file_io.create_files(outdirectory, energy, exp_values, x_pot, xevec)
 
 
 if __name__ == '__main__':
