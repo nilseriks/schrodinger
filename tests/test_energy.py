@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# pylint: disable = E0401
 """Script testing the solver for the one dimensional time independent
 schrodinger equation."""
 
@@ -30,16 +31,16 @@ def test_energy(problem):
         double oscillator (spline interpolation) (rtol=1e-15, atol=1e-15)
         morse potential (rtol=1e-15, atol=1e-15).
     """
-    expectede = calculus.file_io.read_data(_DIRECTORYTEST, problem[1])
+    expectede = calculus.io.read_data(_DIRECTORYTEST, problem[1])
 
     inp = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
     xplot = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
                         endpoint=True)
     pot = calculus.calc.pot_calc(xplot, inp['_POT'], inp['_REG_TYPE'])
 
-    calculatede = calculus.calc._solve_seq(inp['_XMIN'], inp['_XMAX'],
-                                           inp['_NPOINT'], inp['_MASS'],
-                                           pot)[0][0:20]
+    calculatede = calculus.calc.solve_seq(inp['_XMIN'], inp['_XMAX'],
+                                          inp['_NPOINT'], inp['_MASS'],
+                                          pot)[0][0:20]
     if problem[0] == 'harm_osc.inp':
         assert np.allclose(expectede, calculatede, rtol=1e-03, atol=1e-12)
     elif problem[0] == 'inf_square_well.inp':

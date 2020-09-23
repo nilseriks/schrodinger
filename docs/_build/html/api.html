@@ -64,7 +64,7 @@ position of.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array containing expected values of the position.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">expectedx (1darray)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">1darray</p>
 </td>
 </tr>
 </tbody>
@@ -97,36 +97,7 @@ square postions of.</li>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">expx2 (1darray)</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="calc.get_WF_array">
-<code class="descclassname">calc.</code><code class="descname">get_WF_array</code><span class="sig-paren">(</span><em>xplot</em>, <em>min_ev</em>, <em>max_ev</em>, <em>evec</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.get_WF_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the array of the wavefunctions in the</p>
-<p>x1 Psi1(x1) Psi2(x1)</p>
-<p>x2 Psi1(x2) Psi2(x2)</p>
-<p>format.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>xplot</strong> (<em>1darray</em>) – Array containing x values.</li>
-<li><strong>min_ev</strong> (<em>int</em>) – Lower bound of eigenvalues.</li>
-<li><strong>max_ev</strong> (<em>int</em>) – Upper bound of eigenvalues.</li>
-<li><strong>evec</strong> (<em>ndarray</em>) – Array of the eigenvectors.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array in the described format.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">WF (ndarray)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">1darray</p>
 </td>
 </tr>
 </tbody>
@@ -150,14 +121,43 @@ expected values.</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
-<dt>Expected values as colum vector and uncertainties</dt>
-<dd><p class="first last">as second colum vector.</p>
+<dt>Expected values as colum vector and uncertainties as second</dt>
+<dd><p class="first last">colum vector.</p>
 </dd>
 </dl>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">expvalues (2darray)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">2darray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="calc.get_wf_array">
+<code class="descclassname">calc.</code><code class="descname">get_wf_array</code><span class="sig-paren">(</span><em>xplot</em>, <em>min_ev</em>, <em>max_ev</em>, <em>evec</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.get_wf_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the array of the wavefunctions in the</p>
+<p>x1 Psi1(x1) Psi2(x1)</p>
+<p>x2 Psi1(x2) Psi2(x2)</p>
+<p>format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xplot</strong> (<em>1darray</em>) – Array containing x values.</li>
+<li><strong>min_ev</strong> (<em>int</em>) – Lower bound of eigenvalues.</li>
+<li><strong>max_ev</strong> (<em>int</em>) – Upper bound of eigenvalues.</li>
+<li><strong>evec</strong> (<em>ndarray</em>) – Array of the eigenvectors.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array in the described format.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
 </td>
 </tr>
 </tbody>
@@ -182,7 +182,37 @@ expected values.</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array with values of the potential at the points of xplot.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">VV (1darray)</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">1darray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="calc.solve_seq">
+<code class="descclassname">calc.</code><code class="descname">solve_seq</code><span class="sig-paren">(</span><em>xmin</em>, <em>xmax</em>, <em>npoint</em>, <em>mass</em>, <em>pot</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.solve_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solves the discrete time independent schrodinger equation and returns
+the eigenvalues and eigenvectors.
+Note: For the discret solution it assumes that the eigenvectors are zero at
+the bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xmin</strong> (<em>int</em>) – Minimum x value of the potential.</li>
+<li><strong>xmax</strong> (<em>int</em>) – Maximum x value of the potential.</li>
+<li><strong>npoint</strong> (<em>int</em>) – Number of discret points of x.</li>
+<li><strong>pot</strong> (<em>1darray</em>) – Discret potential at the x values.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array containing the eigenvalues.
+ndarray: Array containing the eigenvectors as column vectors.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">1darray</p>
 </td>
 </tr>
 </tbody>
@@ -211,11 +241,7 @@ of.</li>
 </table>
 <dl class="docutils">
 <dt>Retruns:</dt>
-<dd><dl class="first last docutils">
-<dt>uncertainty (1darray): Array containing the uncertainties of the</dt>
-<dd>the expected positions.</dd>
-</dl>
-</dd>
+<dd>1darray: Array containing the uncertainties of the expected positions.</dd>
 </dl>
 </dd></dl>
 
@@ -261,8 +287,8 @@ expected positions and the corresponding uncertainties. The wavefunctions
 are visualized in a plot with the expected positions. The uncertainties are
 visualized in a seperate plot.</p>
 <dl class="function">
-<dt id="plot.pot_plot">
-<code class="descclassname">plot.</code><code class="descname">pot_plot</code><span class="sig-paren">(</span><em>xmin</em>, <em>xmax</em>, <em>min_ev</em>, <em>max_ev</em>, <em>energy</em>, <em>evec</em>, <em>pot</em>, <em>xplot</em>, <em>ydiff</em>, <em>expx</em>, <em>unc</em><span class="sig-paren">)</span><a class="headerlink" href="#plot.pot_plot" title="Permalink to this definition">¶</a></dt>
+<dt id="plot.pot_plot_multi">
+<code class="descclassname">plot.</code><code class="descname">pot_plot_multi</code><span class="sig-paren">(</span><em>xmin</em>, <em>xmax</em>, <em>min_ev</em>, <em>max_ev</em>, <em>energy</em>, <em>evec</em>, <em>pot</em>, <em>xplot</em>, <em>ydiff</em>, <em>expx</em>, <em>unc</em><span class="sig-paren">)</span><a class="headerlink" href="#plot.pot_plot_multi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a graphical plot. It shows the potential, the eigenvalues, the
 wavefunctions, the expected values of the position of the particle. Within
 a second plot it shows the uncertainty of the expected position.</p>
@@ -283,6 +309,36 @@ a second plot it shows the uncertainty of the expected position.</p>
 highest eigenvalue</li>
 <li><strong>expx</strong> (<em>1darray</em>) – Expected values of the position</li>
 <li><strong>unc</strong> (<em>1darray</em>) – Uncertainty of the position.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="plot.pot_plot_one">
+<code class="descclassname">plot.</code><code class="descname">pot_plot_one</code><span class="sig-paren">(</span><em>xmin</em>, <em>xmax</em>, <em>min_ev</em>, <em>max_ev</em>, <em>energy</em>, <em>evec</em>, <em>pot</em>, <em>xplot</em>, <em>ydiff</em>, <em>expx</em>, <em>unc</em><span class="sig-paren">)</span><a class="headerlink" href="#plot.pot_plot_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a graphical plot. It shows the potential, the eigenvalues, the
+wavefunctions, the expected values of the position of the particle. And
+within a second plot it shows the uncertainty of the expected position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>xmin</strong> – Lower bound of the x values.</li>
+<li><strong>xmax</strong> – Upper bound of the x values.</li>
+<li><strong>min_ev</strong> – Lower bound of the eigenvalues which should be visualized.</li>
+<li><strong>max_ev</strong> – Upper bound of the eigenvalues which should be visualized.</li>
+<li><strong>energy</strong> – Array of eigenvalues.</li>
+<li><strong>evec</strong> – Array containing the wavefunctions as column vectors.</li>
+<li><strong>pot</strong> – Interpolation of the potential at the xplot values.</li>
+<li><strong>xplot</strong> – Values were the potential is defined.</li>
+<li><strong>ydiff</strong> – Absolute difference between the lowest pot-value and the highest
+eigenvalue.</li>
+<li><strong>expx</strong> – Expected values of the position.</li>
+<li><strong>unc</strong> – Uncertainty of the position.</li>
 </ul>
 </td>
 </tr>

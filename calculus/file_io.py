@@ -68,17 +68,6 @@ def read_schrodinger(directory, file):
     return alldata
 
 
-def write_result(directory, fname, array):
-    """Write an array into a file.
-
-    Args:
-        directory (str): Directory where to write the file.
-        fname (str): Name of the file.
-        array (ndarray): Array to write into fname.
-    """
-    np.savetxt(os.path.join(directory, fname), array)
-
-
 def read_data(directory, fname):
     """Read a file and extract the content as an array.
 
