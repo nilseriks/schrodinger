@@ -29,7 +29,6 @@ def pot_calc(xplot, discrete_pot, interpoltype):
         return VV(xplot)
 
 
-<<<<<<< HEAD
 def solve_seq(xmin, xmax, npoint, mass, pot):
     """Solves the discrete time independent schrodinger equation and returns
     the eigenvalues and eigenvectors.
