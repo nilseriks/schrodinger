@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>API Documentation &#8212; Schrodinger 0.1 documentation</title>
+    <title>API Documentation &#8212; Schrodinger 1.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1',
+        VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -43,27 +43,61 @@
 <h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-calc">
 <span id="calculations"></span><h2>Calculations<a class="headerlink" href="#module-calc" title="Permalink to this headline">¶</a></h2>
-<p>Module which contains all functions for numerical calculations.</p>
+<p>Module containing all functions for numerical calculations.</p>
 <dl class="function">
 <dt id="calc.expected_values">
-<code class="descclassname">calc.</code><code class="descname">expected_values</code><span class="sig-paren">(</span><em>xplot</em>, <em>EVEC</em>, <em>minEV</em>, <em>maxEV</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.expected_values" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">calc.</code><code class="descname">expected_values</code><span class="sig-paren">(</span><em>xplot</em>, <em>evec</em>, <em>min_ev</em>, <em>max_ev</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.expected_values" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the expected value of the position.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>xplot</strong> – x values.</li>
-<li><strong>EVEC</strong> – Array of the eigenvectors to calculate the expected position of.</li>
-<li><strong>minEV</strong> – Lower bound of the eigenvalues.</li>
-<li><strong>maxEV</strong> – Upper bound of the eigenvalues.</li>
+<li><strong>xplot</strong> (<em>1darray</em>) – x values.</li>
+<li><strong>evec</strong> (<em>ndarray</em>) – Array of the eigenvectors to calculate the expected
+position of.</li>
+<li><strong>min_ev</strong> (<em>int</em>) – Lower bound of the eigenvalues.</li>
+<li><strong>max_ev</strong> (<em>int</em>) – Upper bound of the eigenvalues.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array containing the expected values of the position.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array containing expected values of the position.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">expectedx</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">expectedx (1darray)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="calc.expected_x_square">
+<code class="descclassname">calc.</code><code class="descname">expected_x_square</code><span class="sig-paren">(</span><em>xplot</em>, <em>evec</em>, <em>min_ev</em>, <em>max_ev</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.expected_x_square" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the expected values of the square of the position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>xplot</strong> (<em>1darray</em>) – x values.</li>
+<li><strong>evec</strong> (<em>ndarray</em>) – Array containing the wavefunctions.</li>
+<li><strong>min_ev</strong> (<em>int</em>) – Lower bound of eigenvalues to calculate the expected
+square positions of.</li>
+<li><strong>max_ev</strong> (<em>int</em>) – Upper bound of eigenvalues to calculate the expected
+square postions of.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Array containing the expected values of the square</dt>
+<dd><p class="first last">position from the minEV eigenvalue to the maxEV eigenvalue.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">expx2 (1darray)</p>
 </td>
 </tr>
 </tbody>
@@ -72,8 +106,8 @@
 
 <dl class="function">
 <dt id="calc.get_WF_array">
-<code class="descclassname">calc.</code><code class="descname">get_WF_array</code><span class="sig-paren">(</span><em>xplot</em>, <em>minEV</em>, <em>maxEV</em>, <em>evec</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.get_WF_array" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculating the Array of the wavefunctions in the</p>
+<code class="descclassname">calc.</code><code class="descname">get_WF_array</code><span class="sig-paren">(</span><em>xplot</em>, <em>min_ev</em>, <em>max_ev</em>, <em>evec</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.get_WF_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the array of the wavefunctions in the</p>
 <p>x1 Psi1(x1) Psi2(x1)</p>
 <p>x2 Psi1(x2) Psi2(x2)</p>
 <p>format.</p>
@@ -82,17 +116,48 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>xplot</strong> – Array of the x values.</li>
-<li><strong>minEV</strong> – Lower bound of eigenvalues.</li>
-<li><strong>maxEV</strong> – Upper bound of eigenvalues.</li>
-<li><strong>evec</strong> – Array of the eigenvectors.</li>
+<li><strong>xplot</strong> (<em>1darray</em>) – Array containing x values.</li>
+<li><strong>min_ev</strong> (<em>int</em>) – Lower bound of eigenvalues.</li>
+<li><strong>max_ev</strong> (<em>int</em>) – Upper bound of eigenvalues.</li>
+<li><strong>evec</strong> (<em>ndarray</em>) – Array of the eigenvectors.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array with the described format.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array in the described format.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">WF</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">WF (ndarray)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="calc.get_exp_unc">
+<code class="descclassname">calc.</code><code class="descname">get_exp_unc</code><span class="sig-paren">(</span><em>expx</em>, <em>unc</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.get_exp_unc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combines the arrays of the expected values and the array of the
+corresponding uncertainties.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>expx</strong> (<em>1darray</em>) – Array containing the expected values.</li>
+<li><strong>unc</strong> (<em>1darray</em>) – Array containing the uncertainties corresponding to the
+expected values.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Expected values as colum vector and uncertainties</dt>
+<dd><p class="first last">as second colum vector.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">expvalues (2darray)</p>
 </td>
 </tr>
 </tbody>
@@ -102,26 +167,56 @@
 <dl class="function">
 <dt id="calc.pot_calc">
 <code class="descclassname">calc.</code><code class="descname">pot_calc</code><span class="sig-paren">(</span><em>xplot</em>, <em>discrete_pot</em>, <em>interpoltype</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.pot_calc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Interpolates the Potential for given data points.</p>
+<dd><p>Interpolates the potential for given data points.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>xplot</strong> – Array of the x values.</li>
-<li><strong>pot</strong> – Array with the data points of the potential.</li>
-<li><strong>interpoltype</strong> – Type of the interpolation.</li>
+<li><strong>xplot</strong> (<em>1darray</em>) – Array containing the x values.</li>
+<li><strong>discrete_pot</strong> (<em>1darry</em>) – Array containing data points of the potential.</li>
+<li><strong>interpoltype</strong> (<em>str</em>) – Type of the interpolation.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Array with values of the potential at the points of xplot.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">VV</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">VV (1darray)</p>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="calc.uncertainty">
+<code class="descclassname">calc.</code><code class="descname">uncertainty</code><span class="sig-paren">(</span><em>xplot</em>, <em>evec</em>, <em>min_ev</em>, <em>max_ev</em><span class="sig-paren">)</span><a class="headerlink" href="#calc.uncertainty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the uncertainty of the expected position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>xplot</strong> (<em>1darray</em>) – x values.</li>
+<li><strong>evec</strong> (<em>ndarray</em>) – Array containing the wavefunctions.</li>
+<li><strong>min_ev</strong> (<em>int</em>) – Lower bound of eigenvalues to calculate the uncertainty
+of.</li>
+<li><strong>max_ev</strong> (<em>int</em>) – Upper bound of eigenvalues to calculate the uncertainty
+of.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Retruns:</dt>
+<dd><dl class="first last docutils">
+<dt>uncertainty (1darray): Array containing the uncertainties of the</dt>
+<dd>the expected positions.</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <p>Following code is a snippet of the calc module. It shows the function
@@ -159,45 +254,50 @@ interpolating the potential based on the user input.</p>
 </div>
 </div></blockquote>
 </div>
-<div class="section" id="module-visualizer">
-<span id="visualization"></span><h2>Visualization<a class="headerlink" href="#module-visualizer" title="Permalink to this headline">¶</a></h2>
-<p>This script visualizes the wavefunctions of a given potential.</p>
+<div class="section" id="module-plot">
+<span id="visualization"></span><h2>Visualization<a class="headerlink" href="#module-plot" title="Permalink to this headline">¶</a></h2>
+<p>Containing routines to visualize the potential, the wavefunctions, the
+expected positions and the corresponding uncertainties. The wavefunctions
+are visualized in a plot with the expected positions. The uncertainties are
+visualized in a seperate plot.</p>
+<dl class="function">
+<dt id="plot.pot_plot">
+<code class="descclassname">plot.</code><code class="descname">pot_plot</code><span class="sig-paren">(</span><em>xmin</em>, <em>xmax</em>, <em>min_ev</em>, <em>max_ev</em>, <em>energy</em>, <em>evec</em>, <em>pot</em>, <em>xplot</em>, <em>ydiff</em>, <em>expx</em>, <em>unc</em><span class="sig-paren">)</span><a class="headerlink" href="#plot.pot_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a graphical plot. It shows the potential, the eigenvalues, the
+wavefunctions, the expected values of the position of the particle. Within
+a second plot it shows the uncertainty of the expected position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>xmin</strong> (<em>int</em>) – Lower bound of the x values</li>
+<li><strong>xmax</strong> (<em>int</em>) – Upper bound of the x values</li>
+<li><strong>min_ev</strong> (<em>int</em>) – Lower bound of the eigenvalues which should be visualized</li>
+<li><strong>max_ev</strong> (<em>int</em>) – Upper bound of the eigenvalues which should be visualized</li>
+<li><strong>energy</strong> (<em>1darray</em>) – Array of eigenvalues</li>
+<li><strong>evec</strong> (<em>ndarray</em>) – Array containing the wavefunctions as column vectors</li>
+<li><strong>pot</strong> (<em>1darray</em>) – Interpolation of the potential at the xplot values</li>
+<li><strong>xplot</strong> (<em>1darray</em>) – Values were the potential is defined</li>
+<li><strong>ydiff</strong> (<em>int</em>) – Absolute difference between the lowest pot-value and the
+highest eigenvalue</li>
+<li><strong>expx</strong> (<em>1darray</em>) – Expected values of the position</li>
+<li><strong>unc</strong> (<em>1darray</em>) – Uncertainty of the position.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-visualizer"></span><p>This script visualizes the wavefunctions of a given potential. It also shows
+the expected values of the position and the corresponding uncertainties.</p>
 <dl class="function">
 <dt id="visualizer.main">
 <code class="descclassname">visualizer.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#visualizer.main" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main function to show the plot of the potential, the eigenvalues, the
 wavefunctions, the expected values of the position of the particle. It
 reads out the data which were calculated by the solver.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="visualizer.pot_plot">
-<code class="descclassname">visualizer.</code><code class="descname">pot_plot</code><span class="sig-paren">(</span><em>xmin</em>, <em>xmax</em>, <em>minEV</em>, <em>maxEV</em>, <em>EVAL</em>, <em>EVEC</em>, <em>pot</em>, <em>xplot</em>, <em>ydiff</em>, <em>expx</em>, <em>unc</em><span class="sig-paren">)</span><a class="headerlink" href="#visualizer.pot_plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a graphical plot. It shows the potential, the eigenvalues, the
-wavefunctions, the expected values of the position of the particle. And
-within a second plot it shows the uncertainty of the expected position.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>xmin</strong> – Lower bound of the x values.</li>
-<li><strong>xmax</strong> – Upper bound of the x values.</li>
-<li><strong>minEV</strong> – Lower bound of the eigenvalues which should be visualized.</li>
-<li><strong>maxEV</strong> – Upper bound of the eigenvalues which should be visualized.</li>
-<li><strong>EVAL</strong> – Array of eigenvalues.</li>
-<li><strong>EVEC</strong> – Array containing the wavefunctions as column vectors.</li>
-<li><strong>pot</strong> – Interpolation of the potential at the xplot values.</li>
-<li><strong>xplot</strong> – Values were the potential is defined.</li>
-<li><strong>ydiff</strong> – Absolute difference between the lowest pot-value and the highest
-eigenvalue.</li>
-<li><strong>expx</strong> – Expected values of the position.</li>
-<li><strong>unc</strong> – Uncertainty of the position.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
 </dd></dl>
 
 <p>Following code is a snippet of the visualizer module. It shows the function
@@ -283,13 +383,13 @@ that creates the graphical interpretation of the plot.</p>
 <div class="section" id="module-solver">
 <span id="execution"></span><h2>Execution<a class="headerlink" href="#module-solver" title="Permalink to this headline">¶</a></h2>
 <p>Main environment to solve the one dimensional time independent schrodinger
-equation for diffrent potentials. It writes the energies into energies.dat,
+equation for different potentials. It writes the energies into energies.dat,
 the wavefunctions into wavefuncs.dat, the potential into potential.dat and
 the expected values of the position into expvalues.dat.</p>
 <dl class="function">
 <dt id="solver.main">
 <code class="descclassname">solver.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#solver.main" title="Permalink to this definition">¶</a></dt>
-<dd><p>Main function to solve the one dimensiional time independent schrodinger
+<dd><p>Main function to solve the one dimensional time independent schrodinger
 equation.</p>
 </dd></dl>
 

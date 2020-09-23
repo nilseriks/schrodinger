@@ -8,15 +8,14 @@ import numpy as np
 
 
 def _getvalue(string_with_data):
-    '''
-    Searches a string for numbers and strips other characters off of them.
+    """Searches a string for numbers and strips other characters off of them.
 
     Args:
-        string_with_data: String the numbers should be read out of
+        string_with_data (str): String the numbers should be read out of
 
     Returns:
-        numbers: Numbers that were included in the input string
-    '''
+        int: Numbers that were included in the input string
+    """
     aa = string_with_data
     hashindex = string_with_data.find('#')
     newstr = ''.join((ch if ch in '0123456789.-e' else ' ')
@@ -28,16 +27,15 @@ def _getvalue(string_with_data):
 
 
 def read_schrodinger(directory, file):
-    '''
-    Reads the file "schrodinger.inp" containing special formated user data
+    """Reads the file "schrodinger.inp" containing special formated user data
     describing the problem
 
     Args:
-        filepath: Filepath of "schrodinger.inp"
+        filepath (str): Filepath of "schrodinger.inp"
 
     Returns:
-        alldata: Dictionary containing the needed data for further calculations
-    '''
+        dict: Dictionary containing the needed data for further calculations
+    """
 
     filepath = directory + '/' + file
 
@@ -71,42 +69,43 @@ def read_schrodinger(directory, file):
 
 
 def write_result(directory, fname, array):
-    """Write an array in a file.
+    """Write an array into a file.
 
     Args:
-        directory: Directory where to write the file.
-        fname: Name of the file.
-        array: Array to write into fname.
+        directory (str): Directory where to write the file.
+        fname (str): Name of the file.
+        array (ndarray): Array to write into fname.
     """
     np.savetxt(os.path.join(directory, fname), array)
 
 
 def read_data(directory, fname):
-    """Read a file and extract the contant as an array.
+    """Read a file and extract the content as an array.
 
     Args:
-        directory: Directory which contains the file.
-        fname. Name of the file.
+        directory (str): Directory which contains the file.
+        fname (str): Name of the file.
 
     Returns:
-        Array of content."""
-    return np.loadtxt(os.path.join(directory, fname))
+        ndarray: Array of content.
+    """
+    data = np.loadtxt(os.path.join(directory, fname))
+    return data
 
 
 def read_files(filepath):
-    '''reads four different files and converts them into arrays
+    """Reads four different files and converts them into arrays
 
     Args:
-        filepath: Filepath of , `energies.dat`, `expvalues.dat, `potential.dat`
-        and `wavefuncs.dat`
+        filepath (str): Filepath of , `energies.dat`, `expvalues.dat,
+         `potential.dat` and `wavefuncs.dat`
 
     Returns:
-        endata: array containing energies of their corresponding eigenstates
-        expxdata: array containing expected values for x and their
-        uncerainnities
-        potdata: array containing potentials and corresponding x-values
-        wfdata: array containing eigenstates and corresponding x-values
-    '''
+        1darray: array containing energies of their corresponding eigenstates
+        1darray: array containing expected values for x and their uncerainties
+        2darray: array containing potentials and corresponding x-values
+        ndarray: array containing eigenstates and corresponding x-values
+    """
     enfile = os.path.join(filepath, "energies.dat")
     expxfile = os.path.join(filepath, "expvalues.dat")
     potfile = os.path.join(filepath, "potential.dat")
@@ -121,20 +120,20 @@ def read_files(filepath):
 
 
 def create_files(filepath, endata, expxdata, potdata, wfdata):
-    '''
+    """
     Creates files containing the energies (`energies.dat`), expected values for
     x and thier uncertainities (`expvalues.dat`), the potentials and their
     corresponding x-values (`potential.dat`) and the eigenstates with their
     corresponding x_values (`wavefuncs.dat`)
 
     Args:
-        filepath: Filepath of the destination, in which the files should be
-        saved
-        endata: array containing data dedicated to `energies.dat`
-        expxdata: array containing data dedicated to `expvalues.dat`
-        potdata: array containing data dedicated to `potential.dat`
-        wfdata: array containing data dedicated to `wavefuncs.dat`
-    '''
+        filepath (str): Filepath of the destination, in which the files should
+          be saved
+        endata (1darray): array containing data dedicated to `energies.dat`
+        expxdata (1darray): array containing data dedicated to `expvalues.dat`
+        potdata (2darray): array containing data dedicated to `potential.dat`
+        wfdata (ndarray): array containing data dedicated to `wavefuncs.dat`
+    """
     enfile = os.path.join(filepath, "energies.dat")
     expxfile = os.path.join(filepath, "expvalues.dat")
     potfile = os.path.join(filepath, "potential.dat")

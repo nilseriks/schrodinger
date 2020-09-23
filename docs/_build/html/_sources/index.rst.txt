@@ -7,7 +7,7 @@
 Welcome to Schrodinger!
 ***********************
 
-Goal of schrodinger
+Goal of Schrodinger
 ===================
 
 Schrodinger is a students project and the first time for said students to

@@ -1,6 +1,6 @@
 """Containing routines to visualize the potential, the wavefunctions, the
 expected positions and the corresponding uncertainties. The wavefunctions
-were visuealized in a plot with the expected positions. The uncertainties were
+are visualized in a plot with the expected positions. The uncertainties are
 visualized in a seperate plot."""
 
 
@@ -13,17 +13,18 @@ def _scale_plot(min_ev, max_ev, energy, evec, index_ev, rtol, atol):
     a better visualization in the graphical plot.
 
     Args:
-        min_ev: Lower bound of the eigenvalues which should be visualized.
-        max_ev: Upper bound of the eigenvalues which should be visualized.
-        energy: Array of eigenvalues.
-        evec: Array containing the wavefunctions as column vectors.
-        index_ev: The indexEV'th wavefunction to calculate the multiplication
-                 factor of.
-        rtol: Relative tolerence to compare diffrent eigenvalues.
-        atol: Absolute tolerence to compare diffrent eigenvalues.
+        min_ev (int): Lower bound of the eigenvalues which should be visualized
+        max_ev (int): Upper bound of the eigenvalues which should be visualized
+        energy (1darray): Array of eigenvalues.
+        evec (ndarray): Array containing the wavefunctions as column vectors
+        index_ev (int): The indexEV'th wavefunction to calculate the
+          multiplication factor of.
+        rtol (float): Relative tolerence to compare different eigenvalues
+        atol (float): Absolute tolerence to compare different eigenvalues
 
     Returns:
-        scale: Multiplication factor which scales the eigenvectors."""
+        int: Multiplication factor which scales the eigenvectors
+    """
     diff_list = []
 
     for kk in range(min_ev - 1, max_ev - 1):
@@ -69,22 +70,22 @@ def _plot_set_unc(ymin, ymax, unc):
 def pot_plot(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff, expx,
              unc):
     """Creates a graphical plot. It shows the potential, the eigenvalues, the
-    wavefunctions, the expected values of the position of the particle. And
-    within a second plot it shows the uncertainty of the expected position.
+    wavefunctions, the expected values of the position of the particle. Within
+    a second plot it shows the uncertainty of the expected position.
 
     Args:
-        xmin: Lower bound of the x values.
-        xmax: Upper bound of the x values.
-        min_ev: Lower bound of the eigenvalues which should be visualized.
-        max_ev: Upper bound of the eigenvalues which should be visualized.
-        energy: Array of eigenvalues.
-        evec: Array containing the wavefunctions as column vectors.
-        pot: Interpolation of the potential at the xplot values.
-        xplot: Values were the potential is defined.
-        ydiff: Absolute difference between the lowest pot-value and the highest
-               eigenvalue.
-        expx: Expected values of the position.
-        unc: Uncertainty of the position.
+        xmin (int): Lower bound of the x values
+        xmax (int): Upper bound of the x values
+        min_ev (int): Lower bound of the eigenvalues which should be visualized
+        max_ev (int): Upper bound of the eigenvalues which should be visualized
+        energy (1darray): Array of eigenvalues
+        evec (ndarray): Array containing the wavefunctions as column vectors
+        pot (1darray): Interpolation of the potential at the xplot values
+        xplot (1darray): Values were the potential is defined
+        ydiff (int): Absolute difference between the lowest pot-value and the
+          highest eigenvalue
+        expx (1darray): Expected values of the position
+        unc (1darray): Uncertainty of the position.
     """
     atol = 0.05 * ydiff
     rtol = 0.05 * ydiff
