@@ -40,8 +40,8 @@ def _plot_set_wf(xmin, xmax, ymin, ymax):
     plt.ylim(ymin, ymax)
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
-    plt.title('Potential, eigenstates, <x>', fontsize=16)
-    plt.xlabel('x [Bohr]', fontsize=16)
+    plt.title(r'Potential, eigenstates, $\langle x\rangle$', fontsize=16)
+    plt.xlabel('$x$ [Bohr]', fontsize=16)
     plt.ylabel('Energy [Hartree]', fontsize=16)
 
     ax = plt.gca()
@@ -57,7 +57,7 @@ def _plot_set_unc(ymin, ymax, unc):
     plt.ylim(ymin, ymax)
     plt.yticks([])
     plt.xticks(fontsize=14)
-    plt.title('sigma x', fontsize=16)
+    plt.title(r'$\sigma_x$', fontsize=16)
     plt.xlabel('[Bohr]', fontsize=16)
 
     ax = plt.gca()
@@ -68,7 +68,7 @@ def _plot_set_unc(ymin, ymax, unc):
 
 
 def pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
-                   expx, unc):
+                   expx, unc, scale):
     """Creates a graphical plot. It shows the potential, the eigenvalues, the
     wavefunctions, the expected values of the position of the particle. Within
     a second plot it shows the uncertainty of the expected position.
@@ -86,12 +86,16 @@ def pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
           highest eigenvalue
         expx (1darray): Expected values of the position
         unc (1darray): Uncertainty of the position.
+        scale (float): Scaling factor of the wavefunctions.
     """
     atol = 0.05 * ydiff
     rtol = 0.05 * ydiff
     ymin = np.amin(pot) - 0.05 * ydiff
-    max_scale = _scale_plot(min_ev, max_ev, energy, evec, max_ev - 1, rtol,
-                            atol)
+    if scale is None:
+        max_scale = _scale_plot(min_ev, max_ev, energy, evec, max_ev - 1, rtol,
+                                atol)
+    else:
+        max_scale = scale
     ymax = (energy[max_ev - 1] + np.amax(max_scale * evec[:, max_ev - 1]) +
             0.05 * ydiff)
 
@@ -107,7 +111,8 @@ def pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
             color = 'red'
         plt.hlines(energy[ii], xmin, xmax, color='lightgray', linewidth=2.5,
                    zorder=1)
-        scale = _scale_plot(min_ev, max_ev, energy, evec, ii, rtol, atol)
+        if scale is None:
+            scale = _scale_plot(min_ev, max_ev, energy, evec, ii, rtol, atol)
         plt.plot(expx[ii], energy[ii], 'x', color='green', markersize=12,
                  markeredgewidth=1.5, zorder=3)
         plt.plot(xplot, scale * evec[:, ii] + energy[ii], color=color,
@@ -127,7 +132,7 @@ def pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
 
 
 def pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
-                 expx, unc):
+                 expx, unc, scale):
     """Creates a graphical plot. It shows the potential, the eigenvalues, the
     wavefunctions, the expected values of the position of the particle. And
     within a second plot it shows the uncertainty of the expected position.
@@ -145,8 +150,10 @@ def pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
                eigenvalue.
         expx: Expected values of the position.
         unc: Uncertainty of the position.
+        scale (float): Scaling factor of the wavefunctions.
     """
-    scale = 0.4 * abs(energy - np.amin(pot)) * 1 / np.amax(abs(evec[:, 0]))
+    if scale is None:
+        scale = 0.4 * abs(energy - np.amin(pot)) * 1 / np.amax(abs(evec[:, 0]))
     ymin = energy - np.amax(scale * evec[:, 0]) + 0.05 * ydiff
     ymax = energy + np.amax(scale * evec[:, 0]) + 0.05 * ydiff
 
