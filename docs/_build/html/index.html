@@ -50,7 +50,7 @@ has to create one input file containing the needed data, which will be read and
 organized in different files. The solution of the problem desbribed in the
 input file will be displayed graphically aswell.</p>
 <p>However, since this is a first time students program, the focus of this project
-was primarily learning to code and espacially parallel development aswell as a
+was primarily learning to code and especially parallel development aswell as a
 comprehensible way of documentation of this progress. Consequently, the code is
 rather simple and possibly not optimal for solving complicated problems.</p>
 </div>
@@ -59,15 +59,34 @@ rather simple and possibly not optimal for solving complicated problems.</p>
 <p>Schrodinger requires Python 3.6 or higher aswell as the packages numpy, scipy,
 os and matplotlib.</p>
 </div>
+<div class="section" id="input-file">
+<h2>Input file<a class="headerlink" href="#input-file" title="Permalink to this headline">¶</a></h2>
+<p>The data describing the problem the user wants schrodinger to solve has to be
+written into an input file named ‘schrodinger.inp’. Schrodinger will search
+the main directory for that file. It is also possible to pass a different
+directory to the program using a comment line argument. The file has to follow
+a special formatting style. Here is an example on how the content of the input
+file can look:</p>
+<div class="highlight-shell"><div class="highlight"><pre><span></span><span class="m">2</span>.0                  <span class="c1"># mass</span>
+-2.0 <span class="m">2</span>.0 <span class="m">1999</span>        <span class="c1"># xMin xMax nPoint</span>
+<span class="m">1</span> <span class="m">5</span>                  <span class="c1"># first and last eigenvalue to print</span>
+linear               <span class="c1"># interpolation type</span>
+<span class="m">2</span>                    <span class="c1"># nr. of interpolation points</span>
+-2.0 <span class="m">0</span>.0
+ <span class="m">2</span>.0 <span class="m">0</span>.0
+</pre></div>
+</div>
+</div>
 <div class="section" id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-calc">Calculations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-plot">Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#module-solver">Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-calc">Calc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-plot">Plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-visualizer">Visualizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-solver">Solver</a></li>
 </ul>
 </li>
 </ul>

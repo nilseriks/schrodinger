@@ -3,8 +3,8 @@ API Documentation
 *****************
 
 
-Calculations
-============
+Calc
+====
 
 .. automodule:: calc
    :members:
@@ -43,16 +43,13 @@ interpolating the potential based on the user input.
                VV = sp.interpolate.CubicSpline(xx, yy, bc_type='natural')
                return VV(xplot)
 
-Visualization
-=============
+Plot
+====
 
 .. automodule:: plot
    :members:
 
-.. automodule:: visualizer
-   :members:
-
-Following code is a snippet of the visualizer module. It shows the function
+Following code is a snippet of the plot module. It shows the function
 that creates the graphical interpretation of the plot.
 
     .. code-block:: python
@@ -132,8 +129,14 @@ that creates the graphical interpretation of the plot.
            plt.show()
 
 
-Execution
-=========
+Visualizer
+==========
+
+.. automodule:: visualizer
+   :members:
+
+Solver
+======
 
 .. automodule:: solver
    :members:

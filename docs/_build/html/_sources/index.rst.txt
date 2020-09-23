@@ -18,7 +18,7 @@ organized in different files. The solution of the problem desbribed in the
 input file will be displayed graphically aswell.
 
 However, since this is a first time students program, the focus of this project
-was primarily learning to code and espacially parallel development aswell as a
+was primarily learning to code and especially parallel development aswell as a
 comprehensible way of documentation of this progress. Consequently, the code is
 rather simple and possibly not optimal for solving complicated problems.
 
@@ -28,6 +28,28 @@ Version and packages
 
 Schrodinger requires Python 3.6 or higher aswell as the packages numpy, scipy,
 os and matplotlib.
+
+
+Input file
+==========
+
+The data describing the problem the user wants schrodinger to solve has to be
+written into an input file named 'schrodinger.inp'. Schrodinger will search
+the main directory for that file. It is also possible to pass a different
+directory to the program using a comment line argument. The file has to follow
+a special formatting style. Here is an example on how the content of the input
+file can look:
+
+.. code-block:: shell
+
+   2.0			# mass
+   -2.0 2.0 1999	# xMin xMax nPoint
+   1 5			# first and last eigenvalue to print
+   linear 		# interpolation type
+   2			# nr. of interpolation points
+   -2.0 0.0
+    2.0 0.0
+
 
 
 API documentation
