@@ -26,8 +26,8 @@ def _clparsing():
     msg = 'Path of the data files'
     parser.add_argument('-dd', '--dinpdir', default='.', help=msg)
 
-    msg = 'Scaling factor for the wavefunctions'
-    parser.add_argument('-s', '--scale', default=None, help=msg)
+    msg = 'Scaling factor for the wavefunctions as a float'
+    parser.add_argument('-s', '--scale', type=float, default=None, help=msg)
 
     args = parser.parse_args()
 
