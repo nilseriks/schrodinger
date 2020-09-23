@@ -48,11 +48,11 @@ def solve_seq(xmin, xmax, npoint, mass, pot):
     delta = abs(xmin - xmax) / npoint
     const = 1 / (mass * delta**2)
     # Calculating the off diagonal values.
-    OD = - 1 / 2 * const * np.ones((npoint - 1,), dtype=float)
+    offdiag = - 1 / 2 * const * np.ones((npoint - 1,), dtype=float)
     # Calculating the main diagonal values.
-    MD = pot + const
-    EVAL, EVEC = sp.linalg.eigh_tridiagonal(MD, OD)
-    return EVAL, EVEC
+    maindiag = pot + const
+    energy, evec = sp.linalg.eigh_tridiagonal(maindiag, offdiag)
+    return energy, evec
 
 
 def get_wf_array(xplot, min_ev, max_ev, evec):

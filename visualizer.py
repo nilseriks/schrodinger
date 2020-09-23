@@ -38,11 +38,11 @@ def main():
         ydiff = abs(energy - np.amin(pot))
 
     if min_ev < max_ev:
-        calculus.plot.pot_plot(xmin, xmax, min_ev, max_ev, energy, evec, pot,
-                               xplot, ydiff, expectedx, uncertainty)
+        calculus.plot.pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec,
+                                     pot, xplot, ydiff, expectedx, uncertainty)
     else:
-        calculus.plot.pot_plot2(xmin, xmax, min_ev, max_ev, energy, evec, pot,
-                                xplot, ydiff, expectedx, uncertainty)
+        calculus.plot.pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec,
+                                   pot, xplot, ydiff, expectedx, uncertainty)
 
 
 if __name__ == '__main__':

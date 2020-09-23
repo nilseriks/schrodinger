@@ -67,8 +67,8 @@ def _plot_set_unc(ymin, ymax, unc):
     ax.spines['left'].set_linewidth(1.2)
 
 
-def pot_plot(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff, expx,
-             unc):
+def pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
+                   expx, unc):
     """Creates a graphical plot. It shows the potential, the eigenvalues, the
     wavefunctions, the expected values of the position of the particle. Within
     a second plot it shows the uncertainty of the expected position.
@@ -123,12 +123,11 @@ def pot_plot(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff, expx,
         plt.plot(unc[ii], energy[ii], marker='+', color='magenta',
                  markersize=17, markeredgewidth=1.85, zorder=2)
 
-
     plt.show()
 
 
-def pot_plot2(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
-              expx, unc):
+def pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
+                 expx, unc):
     """Creates a graphical plot. It shows the potential, the eigenvalues, the
     wavefunctions, the expected values of the position of the particle. And
     within a second plot it shows the uncertainty of the expected position.

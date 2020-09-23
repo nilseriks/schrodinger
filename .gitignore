@@ -2,8 +2,8 @@
 ../calculus/__pycache__
 __pycache__
 .cache/
-calculus/__pycache__/calc.cpython-36.pyc
-/docs/_build
+calculus/__pycache__
+docs/_build
 files/energies.dat
 files/expvalues.dat
 files/potential.dat
