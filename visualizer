@@ -5,7 +5,8 @@ the expected values of the position and the corresponding uncertainties."""
 
 import argparse
 import numpy as np
-import calculus
+from calculus.plot import pot_plot_one, pot_plot_multi
+from calculus._file_io import _read_schrodinger, _read_files
 
 
 _DESCRIPTION = """
@@ -44,7 +45,7 @@ def main():
     dinpdir = args.dinpdir
     scale = args.scale
 
-    data = calculus.file_io.read_files(dinpdir)
+    data = _read_files(dinpdir)
     energy = data[0]
     xplot = data[2][:, 0]
     pot = data[2][:, 1:]
@@ -53,9 +54,9 @@ def main():
     xmin = np.amin(xplot)
     xmax = np.amax(xplot)
 
-    inp = calculus.file_io.read_schrodinger(sinpdir, 'schrodinger.inp')
-    min_ev = inp['_MIN_EV']
-    max_ev = inp['_MAX_EV']
+    inp = _read_schrodinger(sinpdir, 'schrodinger.inp')
+    min_ev = inp['min_ev']
+    max_ev = inp['max_ev']
 
     if min_ev < max_ev:
         expectedx = data[1][:, 0]
@@ -70,13 +71,11 @@ def main():
         ydiff = abs(energy - np.amin(pot))
 
     if min_ev < max_ev:
-        calculus.plot.pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec,
-                                     pot, xplot, ydiff, expectedx, uncertainty,
-                                     scale)
+        pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot,
+                       ydiff, expectedx, uncertainty, scale)
     else:
-        calculus.plot.pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec,
-                                   pot, xplot, ydiff, expectedx, uncertainty,
-                                   scale)
+        pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot,
+                     ydiff, expectedx, uncertainty, scale)
 
 
 if __name__ == '__main__':

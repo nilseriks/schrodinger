@@ -6,7 +6,9 @@ the expected values of the position into expvalues.dat."""
 
 import argparse
 import numpy as np
-import calculus
+from calculus._file_io import _read_schrodinger, _create_files
+from calculus.calc import (pot_calc, solve_seq, _get_wf_array, _get_exp_unc,
+                           expected_values, uncertainty_x)
 
 
 _DESCRIPTION = """
@@ -45,32 +47,29 @@ def main():
     indirectory = args.indir
     outdirectory = args.outdir
     # Read out the informations of the schrodinger.inp file.
-    inp = calculus.io.read_schrodinger(indirectory, _FILE)
+    inp = _read_schrodinger(indirectory, _FILE)
 
-    xplot = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
+    xplot = np.linspace(inp['xmin'], inp['xmax'], num=inp['npoint'],
                         endpoint=True)
 
-    pot = calculus.calc.pot_calc(xplot, inp['_POT'], inp['_REG_TYPE'])
+    pot = pot_calc(xplot, inp['pot'], inp['reg_type'])
 
-    energy, evec = calculus.calc.solve_seq(inp['_XMIN'], inp['_XMAX'],
-                                           inp['_NPOINT'], inp['_MASS'], pot)
+    energy, evec = solve_seq(inp['xmin'], inp['xmax'], inp['npoint'],
+                             inp['mass'], pot)
 
-    energy = energy[inp['_MIN_EV'] - 1: inp['_MAX_EV']]
+    energy = energy[inp['min_ev'] - 1: inp['max_ev']]
 
-    xevec = calculus.calc.get_wf_array(xplot, inp['_MIN_EV'],
-                                       inp['_MAX_EV'], evec)
+    xevec = _get_wf_array(xplot, inp['min_ev'], inp['max_ev'], evec)
 
-    expectedx = calculus.calc.expected_values(xplot, evec, inp['_MIN_EV'],
-                                              inp['_MAX_EV'])
+    expectedx = expected_values(xplot, evec, inp['min_ev'], inp['max_ev'])
 
-    uncertainty = calculus.calc.uncertainty(xplot, evec, inp['_MIN_EV'],
-                                            inp['_MAX_EV'])
+    uncertainty = uncertainty_x(xplot, evec, inp['min_ev'], inp['max_ev'])
 
-    exp_values = calculus.calc.get_exp_unc(expectedx, uncertainty)
+    exp_values = _get_exp_unc(expectedx, uncertainty)
 
     x_pot = np.transpose(np.vstack((xplot, pot)))
 
-    calculus.file_io.create_files(outdirectory, energy, exp_values, x_pot, xevec)
+    _create_files(outdirectory, energy, exp_values, x_pot, xevec)
 
 
 if __name__ == '__main__':

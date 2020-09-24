@@ -55,7 +55,7 @@ def solve_seq(xmin, xmax, npoint, mass, pot):
     return energy, evec
 
 
-def get_wf_array(xplot, min_ev, max_ev, evec):
+def _get_wf_array(xplot, min_ev, max_ev, evec):
     """Calculates the array of the wavefunctions in the\n
     x1 Psi1(x1) Psi2(x1)\n
     x2 Psi1(x2) Psi2(x2)\n
@@ -124,7 +124,7 @@ def expected_x_square(xplot, evec, min_ev, max_ev):
     return expx2
 
 
-def uncertainty(xplot, evec, min_ev, max_ev):
+def uncertainty_x(xplot, evec, min_ev, max_ev):
     """Calculates the uncertainty of the expected position.
 
     Args:
@@ -144,7 +144,7 @@ def uncertainty(xplot, evec, min_ev, max_ev):
     return uncert
 
 
-def get_exp_unc(expx, unc):
+def _get_exp_unc(expx, unc):
     """Combines the arrays of the expected values and the array of the
     corresponding uncertainties.
 

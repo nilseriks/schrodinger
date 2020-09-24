@@ -26,7 +26,7 @@ def _getvalue(string_with_data):
     return numbers
 
 
-def read_schrodinger(directory, file):
+def _read_schrodinger(directory, file):
     """Reads the file "schrodinger.inp" containing special formated user data
     describing the problem
 
@@ -44,31 +44,31 @@ def read_schrodinger(directory, file):
     alldata = dict()
 
     massstring = list_of_data[0]
-    alldata['_MASS'] = _getvalue(massstring)[0]
+    alldata['mass'] = _getvalue(massstring)[0]
 
     interpolationstring = list_of_data[1]
-    alldata['_XMIN'] = _getvalue(interpolationstring)[0]
-    alldata['_XMAX'] = _getvalue(interpolationstring)[1]
-    alldata['_NPOINT'] = int(_getvalue(interpolationstring)[2])
+    alldata['xmin'] = _getvalue(interpolationstring)[0]
+    alldata['xmax'] = _getvalue(interpolationstring)[1]
+    alldata['npoint'] = int(_getvalue(interpolationstring)[2])
 
     ev_string = list_of_data[2]
-    alldata['_MIN_EV'] = int(_getvalue(ev_string)[0])
-    alldata['_MAX_EV'] = int(_getvalue(ev_string)[1])
+    alldata['min_ev'] = int(_getvalue(ev_string)[0])
+    alldata['max_ev'] = int(_getvalue(ev_string)[1])
 
     inttypestring = list_of_data[3]
     seperator = '\t' if '\t' in inttypestring else ' '
-    alldata['_REG_TYPE'] = inttypestring.split(seperator)[0]
-    alldata['_REG_TYPE'] = alldata['_REG_TYPE'].replace("\n", "")
+    alldata['reg_type'] = inttypestring.split(seperator)[0]
+    alldata['reg_type'] = alldata['reg_type'].replace("\n", "")
 
     intpointsstring = list_of_data[4]
-    alldata['_INTERPOLATE_NR'] = _getvalue(intpointsstring)[0]
+    alldata['interpolate_nr'] = _getvalue(intpointsstring)[0]
 
-    alldata['_POT'] = np.loadtxt(filepath, skiprows=5)
+    alldata['pot'] = np.loadtxt(filepath, skiprows=5)
 
     return alldata
 
 
-def read_data(directory, fname):
+def _read_data(directory, fname):
     """Read a file and extract the content as an array.
 
     Args:
@@ -82,7 +82,7 @@ def read_data(directory, fname):
     return data
 
 
-def read_files(filepath):
+def _read_files(filepath):
     """Reads four different files and converts them into arrays
 
     Args:
@@ -108,7 +108,7 @@ def read_files(filepath):
     return endata, expxdata, potdata, wfdata
 
 
-def create_files(filepath, endata, expxdata, potdata, wfdata):
+def _create_files(filepath, endata, expxdata, potdata, wfdata):
     """
     Creates files containing the energies (`energies.dat`), expected values for
     x and thier uncertainities (`expvalues.dat`), the potentials and their

@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Script testing the interpolation of the potentials."""
 
-import sys
 import numpy as np
 import pytest
-sys.path.append('../..')
-import calculus
+from calculus.calc import pot_calc
+from calculus._file_io import _read_schrodinger, _read_data
 
 
 _DIRECTORYFILE = 'tests'
@@ -31,13 +30,12 @@ def test_pot(problem):
         double oscillator (spline interpolation)
         morse potential.
     """
-    expected_pot = calculus.io.read_data(_DIRECTORYTEST, problem[1])
+    expected_pot = _read_data(_DIRECTORYTEST, problem[1])
 
-    inp = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
-    xplot = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
+    inp = _read_schrodinger(_DIRECTORYFILE, problem[0])
+    xplot = np.linspace(inp['xmin'], inp['xmax'], num=inp['npoint'],
                         endpoint=True)
 
-    calculated_pot = calculus.calc.pot_calc(xplot, inp['_POT'],
-                                            inp['_REG_TYPE'])
+    calculated_pot = pot_calc(xplot, inp['pot'], inp['reg_type'])
 
     assert np.allclose(expected_pot, calculated_pot, rtol=1e-14, atol=1e-14)

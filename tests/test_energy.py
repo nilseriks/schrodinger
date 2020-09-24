@@ -2,11 +2,10 @@
 """Script testing the solver for the one dimensional time independent
 schrodinger equation."""
 
-import sys
 import numpy as np
 import pytest
-sys.path.append('../..')
-import calculus
+from calculus.calc import pot_calc, solve_seq
+from calculus._file_io import _read_data, _read_schrodinger
 
 
 _DIRECTORYFILE = 'tests'
@@ -32,16 +31,15 @@ def test_energy(problem):
         double oscillator (spline interpolation) (rtol=1e-15, atol=1e-15)
         morse potential (rtol=1e-15, atol=1e-15).
     """
-    expectede = calculus.io.read_data(_DIRECTORYTEST, problem[1])
+    expectede = _read_data(_DIRECTORYTEST, problem[1])
 
-    inp = calculus.io.read_schrodinger(_DIRECTORYFILE, problem[0])
-    xplot = np.linspace(inp['_XMIN'], inp['_XMAX'], num=inp['_NPOINT'],
+    inp = _read_schrodinger(_DIRECTORYFILE, problem[0])
+    xplot = np.linspace(inp['xmin'], inp['xmax'], num=inp['npoint'],
                         endpoint=True)
-    pot = calculus.calc.pot_calc(xplot, inp['_POT'], inp['_REG_TYPE'])
+    pot = pot_calc(xplot, inp['pot'], inp['reg_type'])
 
-    calculatede = calculus.calc.solve_seq(inp['_XMIN'], inp['_XMAX'],
-                                          inp['_NPOINT'], inp['_MASS'],
-                                          pot)[0][0:20]
+    calculatede = solve_seq(inp['xmin'], inp['xmax'], inp['npoint'],
+                            inp['mass'], pot)[0][0:20]
     if problem[0] == 'harm_osc.inp':
         assert np.allclose(expectede, calculatede, rtol=1e-03, atol=1e-12)
     elif problem[0] == 'inf_square_well.inp':
