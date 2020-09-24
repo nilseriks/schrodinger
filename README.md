@@ -20,10 +20,4 @@ If you find a bug or just want to add some features:
 
 # Documentation
 For the documentation look up the Sphinx API-Documentation. For this enter:
-1. Go into 'schrodinger/docs'
-1. `make html`
-2. `'your browser' _build/html/index.html`
-
-# License
-
-For license informations view the 'LICENSE' file.
+* `'your browser' _build/html/index.html` in the 'schrodinger'directory

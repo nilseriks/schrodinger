@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-# pylint: disable = E0401
 """Script testing the solver for the one dimensional time independent
 schrodinger equation."""
 
+import sys
 import numpy as np
 import pytest
+sys.path.append('../..')
 import calculus
 
 
@@ -23,7 +24,7 @@ _LIST = [('inf_square_well.inp', 'E_inf_square_well.dat'),
 @pytest.mark.parametrize('problem', _LIST)
 def test_energy(problem):
     """Testing environment for the energies of the following physical problems
-    with specific tolarence:
+    with specific tolerances:
         infinite square well (rtol=1e-02, atol=1e-12)
         finite square well (rtol=1e-15, atol=1e-15)
         harmonic oscillator (rtol=1e-03, atol=1e-12)

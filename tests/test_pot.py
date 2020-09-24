@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-# pylint: disable = E0401
 """Script testing the interpolation of the potentials."""
 
+import sys
 import numpy as np
 import pytest
+sys.path.append('../..')
 import calculus
 
 
