@@ -1,8 +1,7 @@
 .spyproject/
-../calculus/__pycache__
-__pycache__
 .cache/
-calculus/__pycache__
+__pycache__
+*.pyc
 docs/_build
 energies.dat
 expvalues.dat
