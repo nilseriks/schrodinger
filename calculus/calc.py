@@ -97,7 +97,7 @@ def expected_values(xplot, evec, min_ev, max_ev):
     expectedx = np.zeros((max_ev - min_ev + 1, ), dtype=float)
     for ii in range(min_ev - 1, max_ev):
         xx = delta * np.sum(evec[:, ii] * xplot * evec[:, ii])
-        expectedx[ii] = xx
+        expectedx[ii - (min_ev - 1)] = xx
     return expectedx
 
 
@@ -120,7 +120,7 @@ def expected_x_square(xplot, evec, min_ev, max_ev):
     expx2 = np.zeros((max_ev - min_ev + 1, ), dtype=float)
     for ii in range(min_ev - 1, max_ev):
         xx = delta * np.sum(evec[:, ii] * xplot**2 * evec[:, ii])
-        expx2[ii] = xx
+        expx2[ii - (min_ev - 1)] = xx
     return expx2
 
 

@@ -27,11 +27,10 @@ def _scale_plot(min_ev, max_ev, energy, evec, index_ev, rtol, atol):
     """
     diff_list = []
 
-    for kk in range(min_ev - 1, max_ev - 1):
-        if not np.allclose(energy[kk + 1], energy[kk], atol=atol,
-                           rtol=rtol):
+    for kk in range(0, max_ev - min_ev):
+        if not np.allclose(energy[kk + 1], energy[kk], atol=atol, rtol=rtol):
             diff_list.append(abs(energy[kk + 1] - energy[kk]))
-    scale = 0.4 * min(diff_list) * 1 / np.amax(abs(evec[:, index_ev]))
+    scale = 0.5 * min(diff_list) * 1 / np.amax(abs(evec[:, index_ev]))
     return scale
 
 
@@ -88,23 +87,25 @@ def pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
         unc (1darray): Uncertainty of the position.
         scale (float): Scaling factor of the wavefunctions.
     """
-    atol = 0.05 * ydiff
-    rtol = 0.05 * ydiff
-    ymin = np.amin(pot) - 0.05 * ydiff
+    atol = 0.02 * ydiff
+    rtol = 0.02 * ydiff
     if scale is None:
-        max_scale = _scale_plot(min_ev, max_ev, energy, evec, max_ev - 1, rtol,
+        max_scale = _scale_plot(min_ev, max_ev, energy, evec, -1, rtol,
+                                atol)
+        min_scale = _scale_plot(min_ev, max_ev, energy, evec, 0, rtol,
                                 atol)
     else:
         max_scale = scale
-    ymax = (energy[max_ev - 1] + np.amax(max_scale * evec[:, max_ev - 1]) +
-            0.05 * ydiff)
+        min_scale = scale
+    ymin = np.amin(energy) - np.amax(min_scale * evec[:, 0]) - 0.05 * ydiff
+    ymax = energy[-1] + np.amax(max_scale * evec[:, -1]) + 0.05 * ydiff
 
     plt.figure(figsize=(9, 6), dpi=80)
 
     plt.subplot(1, 2, 1)
     _plot_set_wf(xmin, xmax, ymin, ymax)
 
-    for ii in range(min_ev - 1, max_ev):
+    for ii in range(0, max_ev - min_ev + 1):
         if ii % 2 == 0:
             color = 'blue'
         else:
@@ -122,7 +123,7 @@ def pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
     plt.subplot(1, 2, 2)
     _plot_set_unc(ymin, ymax, unc)
 
-    for ii in range(min_ev - 1, max_ev):
+    for ii in range(0, max_ev - min_ev + 1):
         plt.hlines(energy[ii], xmin, xmax, color='lightgray', linewidth=2.5,
                    zorder=1)
         plt.plot(unc[ii], energy[ii], marker='+', color='magenta',
@@ -162,25 +163,19 @@ def pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
     plt.subplot(1, 2, 1)
     _plot_set_wf(xmin, xmax, ymin, ymax)
 
-    for ii in range(min_ev - 1, max_ev):
-        if ii % 2 == 0:
-            color = 'blue'
-        else:
-            color = 'red'
-        plt.hlines(energy, xmin, xmax, color='lightgray', linewidth=2.5,
-                   zorder=1)
-        plt.plot(expx, energy, 'x', color='green', markersize=12,
-                 markeredgewidth=1.5, zorder=3)
-        plt.plot(xplot, scale * evec[:, ii] + energy, color=color,
-                 linewidth=2.5, zorder=2)
+    plt.hlines(energy, xmin, xmax, color='lightgray', linewidth=2.5,
+               zorder=1)
+    plt.plot(expx, energy, 'x', color='green', markersize=12,
+             markeredgewidth=1.5, zorder=3)
+    plt.plot(xplot, scale * evec + energy, color='blue',
+             linewidth=2.5, zorder=2)
     plt.plot(xplot, pot, color='black', linewidth=2, zorder=0)
 
     plt.subplot(1, 2, 2)
-    for ii in range(min_ev - 1, max_ev):
-        plt.hlines(energy, xmin, xmax, color='lightgray', linewidth=2.5,
-                   zorder=1)
-        plt.plot(unc, energy, marker='+', color='magenta',
-                 markersize=17, markeredgewidth=1.85, zorder=2)
+    plt.hlines(energy, xmin, xmax, color='lightgray', linewidth=2.5,
+               zorder=1)
+    plt.plot(unc, energy, marker='+', color='magenta',
+             markersize=17, markeredgewidth=1.85, zorder=2)
 
     _plot_set_unc(ymin, ymax, unc)
 

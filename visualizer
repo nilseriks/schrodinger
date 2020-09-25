@@ -66,7 +66,8 @@ def main():
         uncertainty = data[1][1]
 
     if min_ev < max_ev:
-        ydiff = abs(energy[max_ev - 1] - np.amin(pot))
+        #ydiff = abs(np.amax(energy) - np.amin(pot))
+        ydiff = abs(np.amax(energy) - np.amin(energy))
     elif min_ev == max_ev:
         ydiff = abs(energy - np.amin(pot))
 
