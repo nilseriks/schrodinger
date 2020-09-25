@@ -51,6 +51,14 @@ file can look:
     2.0 0.0
 
 
+Notes
+=====
+Here is some aditional information on the calculations:
+
+* The wavefunctions run towards 0 at the chosen borders
+
+* All spline calculations are calculated as natural splines
+
 
 API documentation
 =================

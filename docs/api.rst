@@ -127,16 +127,3 @@ that creates the graphical interpretation of the plot.
            ax.spines['left'].set_linewidth(1.2)
 
            plt.show()
-
-
-Visualizer
-==========
-
-.. automodule:: visualizer
-   :members:
-
-Solver
-======
-
-.. automodule:: solver
-   :members:

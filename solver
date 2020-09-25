@@ -19,7 +19,7 @@ def _clparsing():
     """Takes inputs from the command line and passes them to the program
 
     Returns:
-        dic: Dictionary including the user input from the command line
+        Object: Object storing chosen attributes
     """
     parser = argparse.ArgumentParser(description=_DESCRIPTION)
 
