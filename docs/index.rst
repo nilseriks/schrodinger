@@ -36,7 +36,7 @@ Input file
 The data describing the problem the user wants schrodinger to solve has to be
 written into an input file named 'schrodinger.inp'. Schrodinger will search
 the main directory for that file. It is also possible to pass a different
-directory to the program using a comment line argument. The file has to follow
+directory to the program using a command line argument. The file has to follow
 a special formatting style. Here is an example on how the content of the input
 file can look:
 

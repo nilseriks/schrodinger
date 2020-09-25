@@ -1,6 +1,6 @@
 # Schrodinger
 
-The program solves the one dimensional timeindependent schroedinger eqauation for a given potential. It also contains a script which visualizes the results of the solver.
+The program solves the one dimensional time independent schroedinger eqauation for a given potential. It also contains a script which visualizes the results of the solver.
 
 # Motivation
 
@@ -8,7 +8,7 @@ This is the final project of a scientific programming course of the University o
 
 # Requirements
 
-To run the program you will need Pyhton 3.6 or higher as well as numpy, scipy and matplotlib.
+To run the program you will need Python 3.6 or higher as well as numpy, scipy and matplotlib.
 
 # Contributing
 If you find a bug or just want to add some features:

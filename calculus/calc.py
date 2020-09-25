@@ -135,7 +135,7 @@ def uncertainty_x(xplot, evec, min_ev, max_ev):
         max_ev (int): Upper bound of eigenvalues to calculate the uncertainty
             of.
 
-    Retruns:
+    Returns:
         1darray: Array containing the uncertainties of the expected positions.
     """
     expx = expected_values(xplot, evec, min_ev, max_ev)
