@@ -9,6 +9,7 @@ This is the final project of a scientific programming course of the University o
 # Requirements
 
 To run the program you will need Pyhton 3.6 or higher as well as numpy, scipy and matplotlib.
+To compile the API-Documentation you need Sphinx.
 
 # Contributing
 If you find a bug or just want to add some features:

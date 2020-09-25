@@ -137,8 +137,8 @@ def pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
     plt.show()
 
 
-def pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot, ydiff,
-                 expx, unc, scale):
+def pot_plot_one(xmin, xmax, energy, evec, pot, xplot, ydiff, expx, unc,
+                 scale):
     """Creates a graphical plot. It shows the potential, the eigenvalues, the
     wavefunctions, the expected values of the position of the particle. And
     within a second plot it shows the uncertainty of the expected position.
