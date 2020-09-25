@@ -8,7 +8,10 @@ This is the final project of a scientific programming course of the University o
 
 # Requirements
 
+
 To run the program you will need Python 3.6 or higher as well as numpy, scipy and matplotlib.
+To compile the API-Documentation you need Sphinx.
+>>>>>>> 39fb4254ab3b76a16a798f20ba18a9ef602a6a8d
 
 # Contributing
 If you find a bug or just want to add some features:
@@ -20,4 +23,6 @@ If you find a bug or just want to add some features:
 
 # Documentation
 For the documentation look up the Sphinx API-Documentation. For this enter:
-* `'your browser' _build/html/index.html` in the 'schrodinger'directory
+1. Got to 'schrodinger/docs'
+2. Enter `make html`
+3. Enter `'your browser' _build/html/index.html`

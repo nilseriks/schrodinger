@@ -37,7 +37,7 @@ def _clparsing():
 
 def main():
     """Main function to show the plot of the potential, the eigenvalues, the
-    wavefunctions, the expected values of the position of the particle. It
+    wavefunctions and the expected values of the position of the particle. It
     reads out the data which were calculated by the solver.
     """
     args = _clparsing()
@@ -45,7 +45,13 @@ def main():
     dinpdir = args.dinpdir
     scale = args.scale
 
-    data = _read_files(dinpdir)
+    try:
+        data = _read_files(dinpdir)
+    except OSError as exc:
+        print("Data could not be read.")
+        print("Original error messege: {}".format(exc))
+        quit()
+
     energy = data[0]
     xplot = data[2][:, 0]
     pot = data[2][:, 1:]
@@ -54,7 +60,13 @@ def main():
     xmin = np.amin(xplot)
     xmax = np.amax(xplot)
 
-    inp = _read_schrodinger(sinpdir, 'schrodinger.inp')
+    try:
+        inp = _read_schrodinger(sinpdir, 'schrodinger.inp')
+    except OSError as exc:
+        print("File 'schrodinger.inp' could not be read.")
+        print("Original error messege: {}".format(exc))
+        quit()
+
     min_ev = inp['min_ev']
     max_ev = inp['max_ev']
 
@@ -66,7 +78,6 @@ def main():
         uncertainty = data[1][1]
 
     if min_ev < max_ev:
-        #ydiff = abs(np.amax(energy) - np.amin(pot))
         ydiff = abs(np.amax(energy) - np.amin(energy))
     elif min_ev == max_ev:
         ydiff = abs(energy - np.amin(pot))
@@ -75,8 +86,8 @@ def main():
         pot_plot_multi(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot,
                        ydiff, expectedx, uncertainty, scale)
     else:
-        pot_plot_one(xmin, xmax, min_ev, max_ev, energy, evec, pot, xplot,
-                     ydiff, expectedx, uncertainty, scale)
+        pot_plot_one(xmin, xmax, energy, evec, pot, xplot, ydiff, expectedx,
+                     uncertainty, scale)
 
 
 if __name__ == '__main__':
