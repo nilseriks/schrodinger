@@ -45,7 +45,13 @@ def main():
     dinpdir = args.dinpdir
     scale = args.scale
 
-    data = _read_files(dinpdir)
+    try:
+        data = _read_files(dinpdir)
+    except OSError as exc:
+        print("Data could not be read.")
+        print("Original error messege: {}".format(exc))
+        quit()
+
     energy = data[0]
     xplot = data[2][:, 0]
     pot = data[2][:, 1:]
@@ -54,7 +60,13 @@ def main():
     xmin = np.amin(xplot)
     xmax = np.amax(xplot)
 
-    inp = _read_schrodinger(sinpdir, 'schrodinger.inp')
+    try:
+        inp = _read_schrodinger(sinpdir, 'schrodinger.inp')
+    except OSError as exc:
+        print("File 'schrodinger.inp' could not be read.")
+        print("Original error messege: {}".format(exc))
+        quit()
+
     min_ev = inp['min_ev']
     max_ev = inp['max_ev']
 
