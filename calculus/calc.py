@@ -9,12 +9,12 @@ def pot_calc(xplot, discrete_pot, interpoltype):
     """Interpolates the potential for given data points.
 
     Args:
-        xplot (1darray): Array containing the x values.
-        discrete_pot (1darry) : Array containing data points of the potential.
-        interpoltype (str): Type of the interpolation.
+        xplot (1darray): Array containing the x values
+        discrete_pot (1darry) : Array containing data points of the potential
+        interpoltype (str): Type of the interpolation
 
     Returns:
-        1darray: Array with values of the potential at the points of xplot.
+        1darray: Array with values of the potential at the points of xplot
     """
     xx = discrete_pot[:, 0]
     yy = discrete_pot[:, 1]
@@ -31,19 +31,19 @@ def pot_calc(xplot, discrete_pot, interpoltype):
 
 def solve_seq(xmin, xmax, npoint, mass, pot):
     """Solves the discrete time independent schrodinger equation and returns
-    the eigenvalues and eigenvectors.
+    the eigenvalues and eigenvectors
     Note: For the discret solution it assumes that the eigenvectors are zero at
     the bounds.
 
     Args:
-        xmin (int): Minimum x value of the potential.
-        xmax (int): Maximum x value of the potential.
-        npoint (int): Number of discret points of x.
-        pot (1darray): Discret potential at the x values.
+        xmin (int): Minimum x value of the potential
+        xmax (int): Maximum x value of the potential
+        npoint (int): Number of discret points of x
+        pot (1darray): Discret potential at the x values
 
     Returns:
-        1darray: Array containing the eigenvalues.
-        ndarray: Array containing the eigenvectors as column vectors.
+        1darray: Array containing the eigenvalues
+        ndarray: Array containing the eigenvectors as column vectors
     """
     delta = abs(xmin - xmax) / npoint
     const = 1 / (mass * delta**2)
@@ -62,13 +62,13 @@ def _get_wf_array(xplot, min_ev, max_ev, evec):
     format.
 
     Args:
-        xplot (1darray): Array containing x values.
-        min_ev (int): Lower bound of eigenvalues.
-        max_ev (int): Upper bound of eigenvalues.
-        evec (ndarray): Array of the eigenvectors.
+        xplot (1darray): Array containing x values
+        min_ev (int): Lower bound of eigenvalues
+        max_ev (int): Upper bound of eigenvalues
+        evec (ndarray): Array of the eigenvectors
 
     Returns:
-        ndarray: Array in the described format.
+        ndarray: Array in the described format
     """
     delta = abs(xplot[0] - xplot[1])
     wf_array = np.array([xplot])
@@ -84,14 +84,13 @@ def expected_values(xplot, evec, min_ev, max_ev):
     """Calculates the expected value of the position.
 
     Args:
-        xplot (1darray): x values.
-        evec (ndarray): Array of the eigenvectors to calculate the expected
-          position of.
-        min_ev (int): Lower bound of the eigenvalues.
-        max_ev (int): Upper bound of the eigenvalues.
+        xplot (1darray): x values
+        evec (ndarray): Array of the eigenvectors
+        min_ev (int): Lower bound of the eigenvalues
+        max_ev (int): Upper bound of the eigenvalues
 
     Returns:
-        1darray: Array containing expected values of the position.
+        1darray: Array containing expected values of the position
     """
     delta = abs(xplot[0] - xplot[1])
     expectedx = np.zeros((max_ev - min_ev + 1, ), dtype=float)
@@ -105,12 +104,12 @@ def expected_x_square(xplot, evec, min_ev, max_ev):
     """Calculates the expected values of the square of the position.
 
     Args:
-        xplot (1darray): x values.
-        evec (ndarray): Array containing the wavefunctions.
+        xplot (1darray): x values
+        evec (ndarray): Array containing the wavefunctions
         min_ev (int): Lower bound of eigenvalues to calculate the expected
-            square positions of.
+            squared positions of
         max_ev (int): Upper bound of eigenvalues to calculate the expected
-            square postions of.
+            squared postions of
 
     Returns:
         1darray: Array containing the expected values of the square
@@ -128,12 +127,12 @@ def uncertainty_x(xplot, evec, min_ev, max_ev):
     """Calculates the uncertainty of the expected position.
 
     Args:
-        xplot (1darray): x values.
-        evec (ndarray): Array containing the wavefunctions.
+        xplot (1darray): x values
+        evec (ndarray): Array containing the wavefunctions
         min_ev (int): Lower bound of eigenvalues to calculate the uncertainty
-            of.
+            of
         max_ev (int): Upper bound of eigenvalues to calculate the uncertainty
-            of.
+            of
 
     Retruns:
         1darray: Array containing the uncertainties of the expected positions.
@@ -149,9 +148,9 @@ def _get_exp_unc(expx, unc):
     corresponding uncertainties.
 
     Args:
-        expx (1darray): Array containing the expected values.
+        expx (1darray): Array containing the expected values
         unc (1darray): Array containing the uncertainties corresponding to the
-            expected values.
+            expected values
 
     Returns:
         2darray: Expected values as colum vector and uncertainties as second

@@ -46,7 +46,7 @@ def main():
     args = _clparsing()
     indirectory = args.indir
     outdirectory = args.outdir
-    # Read out the informations of the schrodinger.inp file.
+
     inp = _read_schrodinger(indirectory, _FILE)
 
     xplot = np.linspace(inp['xmin'], inp['xmax'], num=inp['npoint'],

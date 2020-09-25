@@ -37,7 +37,7 @@ def _clparsing():
 
 def main():
     """Main function to show the plot of the potential, the eigenvalues, the
-    wavefunctions, the expected values of the position of the particle. It
+    wavefunctions and the expected values of the position of the particle. It
     reads out the data which were calculated by the solver.
     """
     args = _clparsing()
@@ -66,7 +66,6 @@ def main():
         uncertainty = data[1][1]
 
     if min_ev < max_ev:
-        #ydiff = abs(np.amax(energy) - np.amin(pot))
         ydiff = abs(np.amax(energy) - np.amin(energy))
     elif min_ev == max_ev:
         ydiff = abs(energy - np.amin(pot))

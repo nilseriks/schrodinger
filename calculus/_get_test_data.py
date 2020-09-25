@@ -9,7 +9,7 @@
     """
 
 import numpy as np
-import calculus
+from calculus._file_io import _write_result
 
 
 def _energy_inf_square_well():
@@ -17,7 +17,7 @@ def _energy_inf_square_well():
     eigenvalues.
 
     Args:
-        EVmax (int): Set the upper bound for the eigenvalues to calculate.
+        EVmax (int): Set the upper bound for the eigenvalues to calculate
 
     Returns:
         energy (1darray): Array containing the calculated eigenvalues.
@@ -25,8 +25,8 @@ def _energy_inf_square_well():
     energy = np.zeros((20, ), dtype=float)
     for nn in range(0, 20):
         energy[nn] = np.pi**2 * (nn + 1)**2 / (2 * 2 * (-2 - 2)**2)
-    calculus.file_io.write_result('../tests/test_energy',
-                                  'E_inf_square_well.dat', energy)
+    _write_result('../tests/test_energy',
+                  'E_inf_square_well.dat', energy)
     return energy
 
 
@@ -35,8 +35,8 @@ def _energy_harm_osc():
     eigenvalues.
 
     Args:
-        EVmin (int): Set the lower bound for the eigenvalues to calculate.
-        EVmax (int): Set the upper bound for the eigenvalues to calculate.
+        EVmin (int): Set the lower bound for the eigenvalues to calculate
+        EVmax (int): Set the upper bound for the eigenvalues to calculate
 
     Returns:
         energy (1darray): Array containing the calculated eigenvalues.
@@ -44,8 +44,8 @@ def _energy_harm_osc():
     energy = np.zeros((20, ), dtype=float)
     for nn in range(20):
         energy[nn] = 0.5 * nn + 0.25
-    calculus.file_io.write_result('../tests/test_energy', 'E_harm_osc.dat',
-                                  energy)
+    _write_result('../tests/test_energy', 'E_harm_osc.dat',
+                  energy)
     return energy
 
 
@@ -53,8 +53,8 @@ def _pot_inf_square_well():
     """Calculates the potential of the ininite square well problem.
     """
     pot = np.zeros((1999, ), dtype=float)
-    calculus.file_io.write_result('../tests/test_potential',
-                                  'pot_inf_square_well.dat', pot)
+    _write_result('../tests/test_potential',
+                  'pot_inf_square_well.dat', pot)
     return pot
 
 
@@ -65,8 +65,8 @@ def _pot_fin_square_well():
     pot2 = -10 * np.ones((499, ), dtype=float)
     pot3 = np.zeros((750, ), dtype=float)
     pot = np.concatenate((pot1, pot2, pot3), axis=0)
-    calculus.file_io.write_result('../tests/test_potential',
-                                  'pot_fin_square_well.dat', pot)
+    _write_result('../tests/test_potential',
+                  'pot_fin_square_well.dat', pot)
     return pot
 
 
@@ -76,8 +76,8 @@ def _pot_harm_osc():
     xplot = np.linspace(-5, 5, num=1999, endpoint=True)
     pot = 0.5 * xplot**2
 
-    calculus.file_io.write_result('../tests/test_potential',
-                                  'pot_harm_osc.dat', pot)
+    _write_result('../tests/test_potential',
+                  'pot_harm_osc.dat', pot)
     return pot
 
 
