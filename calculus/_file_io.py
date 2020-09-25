@@ -72,14 +72,25 @@ def _read_data(directory, fname):
     """Read a file and extract the content as an array.
 
     Args:
-        directory (str): Directory which contains the file.
-        fname (str): Name of the file.
+        directory (str): Directory which contains the file
+        fname (str): Name of the file
 
     Returns:
         ndarray: Array of content.
     """
     data = np.loadtxt(os.path.join(directory, fname))
     return data
+
+
+def _write_result(directory, fname, array):
+    """Write an array in a file.
+
+    Args:
+        directory: Directory where to write the file.
+        fname: Name of the file.
+        array: Array to write into fname.
+    """
+    np.savetxt(os.path.join(directory, fname), array)
 
 
 def _read_files(filepath):

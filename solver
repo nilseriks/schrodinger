@@ -46,8 +46,13 @@ def main():
     args = _clparsing()
     indirectory = args.indir
     outdirectory = args.outdir
-    # Read out the informations of the schrodinger.inp file.
-    inp = _read_schrodinger(indirectory, _FILE)
+
+    try:
+        inp = _read_schrodinger(indirectory, _FILE)
+    except OSError as exc:
+        print("File 'schrodinger.inp' could not be read.")
+        print("Original error messege: {}".format(exc))
+        quit()
 
     xplot = np.linspace(inp['xmin'], inp['xmax'], num=inp['npoint'],
                         endpoint=True)
@@ -69,7 +74,12 @@ def main():
 
     x_pot = np.transpose(np.vstack((xplot, pot)))
 
-    _create_files(outdirectory, energy, exp_values, x_pot, xevec)
+    try:
+        _create_files(outdirectory, energy, exp_values, x_pot, xevec)
+    except OSError as exc:
+        print("Solutions could not be stored in the output directory.")
+        print("Original error messege: {}".format(exc))
+        quit()
 
 
 if __name__ == '__main__':
